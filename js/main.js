@@ -44,20 +44,21 @@
   });
 
   const track = document.querySelector(".testimonials__track");
-  const prevBtn = document.querySelector(".testimonials__nav--prev");
-  const nextBtn = document.querySelector(".testimonials__nav--next");
-
   if (!track) return;
 
+  const prevBtn = document.querySelector(".testimonials__nav--prev");
+  const nextBtn = document.querySelector(".testimonials__nav--next");
   const allSlides = Array.from(track.querySelectorAll(".testimonials__slide"));
   if (!allSlides.length) return;
+
+  const mobileMq = window.matchMedia("(max-width: 767px)");
 
   allSlides.forEach((slide) => {
     slide.dataset.hasPhoto = slide.querySelector("img.review-card__avatar") ? "true" : "false";
   });
 
   function isMobileView() {
-    return window.innerWidth < 768;
+    return mobileMq.matches;
   }
 
   function sortSlidesForViewport() {
@@ -127,21 +128,31 @@
     autoplayTimer = setInterval(next, 6000);
   }
 
-  prevBtn?.addEventListener("click", () => {
-    prev();
-    startAutoplay();
-  });
+  function initCarousel() {
+    prevBtn?.addEventListener("click", () => {
+      prev();
+      startAutoplay();
+    });
 
-  nextBtn?.addEventListener("click", () => {
-    next();
-    startAutoplay();
-  });
+    nextBtn?.addEventListener("click", () => {
+      next();
+      startAutoplay();
+    });
 
-  window.addEventListener("resize", () => {
-    index = 0;
+    mobileMq.addEventListener("change", () => {
+      index = 0;
+      updateCarousel();
+    });
+
     updateCarousel();
-  });
+    startAutoplay();
+  }
 
-  updateCarousel();
-  startAutoplay();
+  const defer =
+    window.requestIdleCallback ||
+    function (cb) {
+      window.setTimeout(cb, 300);
+    };
+
+  defer(initCarousel);
 })();
