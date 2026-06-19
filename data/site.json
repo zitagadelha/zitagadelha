@@ -1,0 +1,21 @@
+{
+  "brand": "Zita Gadelha Psicóloga",
+  "owner": "Zita Ribeiro Gadelha",
+  "crp": "11/09722",
+  "url": "https://zitapsi.com.br",
+  "contactEmail": "zitapsicologa@gmail.com",
+  "whatsapp": "+55 85 98812-2222",
+  "segment": "Psicoterapia online para mulheres, com abordagem em Terapia Cognitivo-Comportamental (TCC)",
+  "lastUpdated": "17 de junho de 2026",
+  "tracking": {
+    "inCode": ["Google Tag Manager (GTM)"],
+    "viaGtm": ["Google Analytics 4 (GA4)", "Google Ads (Conversões e Remarketing)"],
+    "notUsed": [
+      "Meta Pixel (Facebook/Instagram)",
+      "TikTok Pixel",
+      "X (Twitter) Pixel",
+      "Kwai Pixel",
+      "YouTube Pixel"
+    ]
+  }
+}
