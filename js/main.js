@@ -6,6 +6,10 @@
     el.setAttribute("href", WA_URL);
     el.setAttribute("target", "_blank");
     el.setAttribute("rel", "noopener noreferrer");
+    el.addEventListener("click", () => {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "whatsapp_lead_click" });
+    });
   });
 
   document.querySelectorAll(".faq__question").forEach((btn) => {

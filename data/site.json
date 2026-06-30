@@ -8,8 +8,8 @@
   "segment": "Psicoterapia online para mulheres, com abordagem em Terapia Cognitivo-Comportamental (TCC)",
   "lastUpdated": "17 de junho de 2026",
   "tracking": {
-    "inCode": ["Google Tag Manager (GTM)"],
-    "viaGtm": ["Google Analytics 4 (GA4)", "Google Ads (Conversões e Remarketing)"],
+    "inCode": ["Google Tag Manager (GTM)", "Google Ads (gtag.js)"],
+    "viaGtm": ["Google Analytics 4 (GA4)", "Google Ads"],
     "notUsed": [
       "Meta Pixel (Facebook/Instagram)",
       "TikTok Pixel",
