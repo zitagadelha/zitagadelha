@@ -3,12 +3,30 @@
     {
       "source": "/psicologa-online",
       "destination": "/psicologa-online.html"
+    },
+    {
+      "source": "/psicologa-ansiedade-online",
+      "destination": "/psicologa-ansiedade-online.html"
+    },
+    {
+      "source": "/psicologa-para-mulheres",
+      "destination": "/psicologa-para-mulheres.html"
     }
   ],
   "redirects": [
     {
       "source": "/psicologa-online.html",
       "destination": "/psicologa-online",
+      "permanent": true
+    },
+    {
+      "source": "/psicologa-ansiedade-online.html",
+      "destination": "/psicologa-ansiedade-online",
+      "permanent": true
+    },
+    {
+      "source": "/psicologa-para-mulheres.html",
+      "destination": "/psicologa-para-mulheres",
       "permanent": true
     }
   ],
@@ -36,7 +54,25 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</css/critical.css>; rel=preload; as=style, </IMG/IMG_6149_convertida_reduzida.webp>; rel=preload; as=image"
+          "value": "</IMG/IMG_6149_convertida_reduzida.webp>; rel=preload; as=image; fetchpriority=high"
+        }
+      ]
+    },
+    {
+      "source": "/psicologa-ansiedade-online",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</IMG/IMG_6149_convertida_reduzida.webp>; rel=preload; as=image; fetchpriority=high"
+        }
+      ]
+    },
+    {
+      "source": "/psicologa-para-mulheres",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</IMG/IMG_6149_convertida_reduzida.webp>; rel=preload; as=image; fetchpriority=high"
         }
       ]
     },

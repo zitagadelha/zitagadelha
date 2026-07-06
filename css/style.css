@@ -60,8 +60,8 @@
   --green-hover: #4aa35c;
   --text: #000000;
   --white: #ffffff;
-  --cream: #faf8f7;
-  --bg-light: #f3f0ef;
+  --cream: #fdfcfb;
+  --bg-light: #f9f8f7;
   --card-bg: #ffffff;
   --shadow: 0 8px 32px rgba(156, 99, 111, 0.1);
   --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.06);
@@ -321,6 +321,47 @@ body:not(.lp-ads) .hero::before {
   grid-template-columns: 1fr minmax(160px, var(--zita-photo-size));
   gap: clamp(1rem, 3vw, 2rem);
   align-items: center;
+}
+
+.lp-ads .hero__inner {
+  display: grid;
+  grid-template-columns: 1fr minmax(160px, var(--zita-photo-size));
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  align-items: center;
+}
+
+.lp-ads .hero__content {
+  max-width: none;
+  text-align: left;
+}
+
+.lp-ads .hero__title {
+  font-size: clamp(1.3rem, 3.5vw, 1.85rem);
+  margin: 0 0 1rem;
+}
+
+.lp-ads .hero__copy {
+  margin: 0 0 1.25rem;
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.lp-ads .hero__copy p {
+  margin: 0 0 0.75rem;
+}
+
+.lp-ads .hero__copy p:last-child {
+  margin-bottom: 0;
+}
+
+.lp-ads .hero__lead {
+  margin-bottom: 1rem;
+}
+
+.lp-ads .hero__media {
+  max-width: var(--zita-photo-size);
+  margin-inline: 0;
 }
 
 .hero__content {
@@ -760,6 +801,24 @@ body:not(.lp-ads) .hero::before {
   margin-bottom: 0.65rem;
 }
 
+.about__subheading {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--mauve);
+  line-height: 1.35;
+}
+
+.about__list {
+  margin: 0 0 0.5rem;
+  padding-left: 1.15rem;
+  color: var(--text);
+}
+
+.about__list li {
+  margin-bottom: 0.35rem;
+}
+
 /* Therapy list */
 .therapy__list {
   list-style: none;
@@ -867,6 +926,31 @@ body:not(.lp-ads) .hero::before {
   color: var(--text);
   font-size: 1rem;
   margin: 0 0 0.85rem;
+}
+
+.online__steps {
+  margin-top: 2rem;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+.online__steps-title {
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--mauve);
+  text-align: center;
+}
+
+.online__steps-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--text);
+}
+
+.online__steps-list li {
+  margin-bottom: 0.65rem;
+  line-height: 1.55;
 }
 
 .section__lead--spaced {
@@ -1388,6 +1472,48 @@ body:not(.lp-ads) .hero::before {
   .hero__media {
     max-width: calc(var(--zita-photo-size) * 0.85);
     margin-inline: auto;
+  }
+
+  .lp-ads .hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.25rem;
+  }
+
+  .lp-ads .hero__content {
+    display: contents;
+  }
+
+  .lp-ads .hero__title {
+    order: 1;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  .lp-ads .hero__lead {
+    order: 3;
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  .lp-ads .hero__media {
+    order: 2;
+    max-width: calc(var(--zita-photo-size) * 0.85);
+  }
+
+  .lp-ads .hero__copy {
+    order: 4;
+    align-self: stretch;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 0;
+  }
+
+  .lp-ads .hero__content > .btn {
+    order: 5;
   }
 
   .testimonials__nav--prev { left: 0.15rem; }
