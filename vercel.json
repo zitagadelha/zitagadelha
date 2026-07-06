@@ -15,6 +15,16 @@
   ],
   "redirects": [
     {
+      "source": "/psicologo-online",
+      "destination": "/psicologa-online",
+      "permanent": true
+    },
+    {
+      "source": "/psicologo-online.html",
+      "destination": "/psicologa-online",
+      "permanent": true
+    },
+    {
       "source": "/psicologa-online.html",
       "destination": "/psicologa-online",
       "permanent": true
