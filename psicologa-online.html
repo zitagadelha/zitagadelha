@@ -416,7 +416,7 @@ body:not(.lp-ads) .hero::before{content:"";position:absolute;inset:0;z-index:1;b
         </li>
       </ul>
       <div class="site-footer__copy">
-        <p>© 2026 — Zita Gadelha Psicóloga · CRP 11/09722</p>
+        <p>© <span id="footer-year">2026</span> — Zita Gadelha Psicóloga · CRP 11/09722</p>
         <p>
           <a href="privacy-policy.html">Política de Privacidade</a> ·
           <a href="terms-of-use.html">Termos de Uso</a> ·
@@ -711,5 +711,11 @@ body:not(.lp-ads) .hero::before{content:"";position:absolute;inset:0;z-index:1;b
   </style>
   <script src="js/main-lp.js" defer></script>
   <script src="js/consent.js" defer></script>
+  <script>
+    (function () {
+      var el = document.getElementById("footer-year");
+      if (el) el.textContent = new Date().getFullYear();
+    })();
+  </script>
 </body>
 </html>

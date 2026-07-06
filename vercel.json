@@ -63,6 +63,10 @@
       "source": "/psicologa-online",
       "headers": [
         {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
           "key": "Link",
           "value": "</IMG/IMG_6149_convertida_reduzida.webp>; rel=preload; as=image; fetchpriority=high"
         }
@@ -72,6 +76,10 @@
       "source": "/psicologa-ansiedade-online",
       "headers": [
         {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
           "key": "Link",
           "value": "</IMG/IMG_6149_convertida_reduzida.webp>; rel=preload; as=image; fetchpriority=high"
         }
@@ -80,6 +88,10 @@
     {
       "source": "/psicologa-para-mulheres",
       "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
         {
           "key": "Link",
           "value": "</IMG/IMG_6149_convertida_reduzida.webp>; rel=preload; as=image; fetchpriority=high"
