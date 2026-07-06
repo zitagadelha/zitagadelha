@@ -115,6 +115,7 @@ body:not(.lp-ads) .hero::before{content:"";position:absolute;inset:0;z-index:1;b
           <li><a href="#inicio">Início</a></li>
           <li><a href="#quemsoueu">Sobre Mim</a></li>
           <li><a href="#atendimento">Como Funciona</a></li>
+          <li><a href="#depoimentos">Depoimentos</a></li>
           <li><a href="#faq">Dúvidas</a></li>
         </ul>
         <a class="btn btn--sm btn--whatsapp site-nav__cta" id="btn-whatsapp-header" data-wa href="https://wa.me/5585988122222?text=Ol%C3%A1.+Vim+da+p%C3%A1gina+de+ansiedade+e+gostaria+de+marcar+uma+sess%C3%A3o+particular+com+a+@zitapsi%E2%80%A6." target="_blank" rel="noopener noreferrer">Agendar sessão</a>
@@ -148,6 +149,7 @@ body:not(.lp-ads) .hero::before{content:"";position:absolute;inset:0;z-index:1;b
   <!-- 2. Dor: identificação emocional -->
   <section class="section section--cream" id="dor">
     <div class="container">
+      <hr class="online__divider" aria-hidden="true">
       <div class="split__content pain__text">
         <h2 class="section__title section__header--left">Situações em que o acompanhamento psicológico online vai te ajudar</h2>
         <p class="pain__intro">Muitas mulheres convivem com a sensação de estar sempre no limite — e ainda assim colocam o próprio bem-estar por último.</p>
@@ -261,13 +263,14 @@ body:not(.lp-ads) .hero::before{content:"";position:absolute;inset:0;z-index:1;b
           </div>
         </div>
       </div>
+      <hr class="online__divider" aria-hidden="true">
       <div class="online__steps">
         <h3 class="online__steps-title">O passo a passo para o nosso primeiro encontro</h3>
         <ol class="online__steps-list">
-          <li><strong>1.</strong> Entre em contato pelo WhatsApp para combinar horário e tirar dúvidas.</li>
-          <li><strong>2.</strong> Sessões semanais de 50 minutos por videochamada, no dia e horário combinados.</li>
-          <li><strong>3.</strong> Ambiente reservado, com total sigilo profissional em cada encontro.</li>
-          <li><strong>4.</strong> Pagamento antecipado via Pix ou cartão de crédito, conforme combinado no primeiro contato.</li>
+          <li>Entre em contato pelo WhatsApp para combinar horário e tirar dúvidas.</li>
+          <li>Sessões semanais de 50 minutos por videochamada, no dia e horário combinados.</li>
+          <li>Ambiente reservado, com total sigilo profissional em cada encontro.</li>
+          <li>Pagamento antecipado via Pix ou cartão de crédito, conforme combinado no primeiro contato.</li>
         </ol>
       </div>
       <div class="online__footer">
@@ -280,7 +283,37 @@ body:not(.lp-ads) .hero::before{content:"";position:absolute;inset:0;z-index:1;b
     </div>
   </section>
 
-  <!-- 5. FAQ: objeções antes da conversão -->
+  <!-- 5. Depoimentos anônimos -->
+  <section class="section section--light" id="depoimentos">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section__title">Relatos de quem já passou pelo acompanhamento</h2>
+        <p class="testimonials__ethics">Em respeito ao Código de Ética Profissional do Psicólogo (CFP), não divulgo nomes, fotos ou qualquer informação que permita identificar quem esteve em atendimento. Os relatos abaixo são compartilhados de forma anônima e com autorização.</p>
+      </div>
+      <div class="testimonials__grid">
+        <article class="testimonial-card">
+          <div class="testimonial-card__avatar" aria-hidden="true">AM</div>
+          <p class="testimonial-card__name">Ana M.</p>
+          <p class="testimonial-card__meta">Atendimento online</p>
+          <blockquote class="testimonial-card__text">&ldquo;Encontrei um espaço seguro para falar sobre ansiedade e autocobrança. Hoje me sinto mais capaz de me priorizar no dia a dia.&rdquo;</blockquote>
+        </article>
+        <article class="testimonial-card">
+          <div class="testimonial-card__avatar" aria-hidden="true">MS</div>
+          <p class="testimonial-card__name">Marina S.</p>
+          <p class="testimonial-card__meta">Atendimento online</p>
+          <blockquote class="testimonial-card__text">&ldquo;A terapia online me permitiu conciliar o processo com a rotina. O acolhimento fez toda diferença desde os primeiros encontros.&rdquo;</blockquote>
+        </article>
+        <article class="testimonial-card">
+          <div class="testimonial-card__avatar" aria-hidden="true">RL</div>
+          <p class="testimonial-card__name">Renata L.</p>
+          <p class="testimonial-card__meta">Atendimento online</p>
+          <blockquote class="testimonial-card__text">&ldquo;Aprendi a reconhecer meus padrões e me posicionar com mais clareza nos relacionamentos. Senti cuidado, ética e profissionalismo em cada sessão.&rdquo;</blockquote>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. FAQ: objeções antes da conversão -->
   <section class="section section--white" id="faq">
     <div class="container">
       <div class="section__header">
@@ -345,7 +378,7 @@ body:not(.lp-ads) .hero::before{content:"";position:absolute;inset:0;z-index:1;b
     </div>
   </section>
 
-  <!-- 6. CTA final -->
+  <!-- 7. CTA final -->
   <section class="cta-final section section--mauve" id="agendamento">
     <div class="container cta-final__content">
         <h2>Dê o primeiro passo por você mesma</h2>
@@ -488,10 +521,86 @@ body:not(.lp-ads) .hero::before{content:"";position:absolute;inset:0;z-index:1;b
       padding: clamp(2.75rem, 5vw, 4.25rem) 0;
     }
     body.lp-ads .section__title {
-      margin-bottom: 1.1rem;
+      margin-bottom: 1.25rem;
+      line-height: 1.35;
     }
     body.lp-ads .section__header {
-      margin-bottom: 2.25rem;
+      margin-bottom: 2.5rem;
+    }
+    body.lp-ads .pain__text .section__title {
+      margin-bottom: 1.5rem;
+    }
+    body.lp-ads .online__card h3 {
+      margin: 0 0 0.65rem;
+      line-height: 1.35;
+    }
+    body.lp-ads .online__card p {
+      line-height: 1.65;
+    }
+    body.lp-ads .online__grid {
+      gap: 1.25rem;
+    }
+    body.lp-ads .online__steps-title {
+      margin-bottom: 1.25rem;
+    }
+    body.lp-ads .online__steps-list li {
+      margin-bottom: 0.85rem;
+      line-height: 1.65;
+    }
+    body.lp-ads .online__steps-list li:last-child {
+      margin-bottom: 0;
+    }
+    body.lp-ads .testimonials__ethics {
+      margin: 1.25rem auto 0;
+      max-width: 680px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text);
+    }
+    body.lp-ads .testimonials__grid {
+      display: grid;
+      gap: 1.25rem;
+    }
+    body.lp-ads .testimonial-card {
+      background: #fff;
+      border: 1px solid rgba(156, 99, 111, 0.12);
+      border-radius: 12px;
+      padding: 1.35rem 1.25rem;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    }
+    body.lp-ads .testimonial-card__avatar {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 0.75rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--mauve-light);
+      color: var(--mauve);
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.02em;
+    }
+    body.lp-ads .testimonial-card__name {
+      margin: 0 0 0.2rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--mauve);
+    }
+    body.lp-ads .testimonial-card__meta {
+      margin: 0 0 1rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+    body.lp-ads .testimonial-card__text {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--text);
+      font-style: italic;
     }
     body.lp-ads .hero__title {
       margin-bottom: 1.25rem;
@@ -547,8 +656,18 @@ body:not(.lp-ads) .hero::before{content:"";position:absolute;inset:0;z-index:1;b
     body.lp-ads .online__wrap {
       margin-top: 0.5rem;
     }
+    body.lp-ads .online__divider {
+      margin: 3.5rem 0 0;
+      border: none;
+      height: 0;
+      border-top: 1px solid rgba(156, 99, 111, 0.3);
+    }
+    body.lp-ads #dor > .container > .online__divider {
+      margin: 0 0 2.5rem;
+    }
     body.lp-ads .online__steps {
-      margin-top: 2rem;
+      margin-top: 3.5rem;
+      padding-top: 0;
     }
     body.lp-ads .online__footer {
       margin-top: 2rem;
@@ -566,6 +685,10 @@ body:not(.lp-ads) .hero::before{content:"";position:absolute;inset:0;z-index:1;b
       }
       body.lp-ads .pain__card {
         padding: 1.1rem 1.15rem;
+      }
+      body.lp-ads .testimonials__grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
       }
     }
     @media (max-width: 767px) {

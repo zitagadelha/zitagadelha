@@ -755,7 +755,7 @@ body:not(.lp-ads) .hero::before {
   font-style: normal;
   font-size: 0.9rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.92);
+  color: var(--text);
 }
 
 .site-footer__nap strong {
@@ -1514,6 +1514,19 @@ body:not(.lp-ads) .hero::before {
 
   .lp-ads .hero__content > .btn {
     order: 5;
+  }
+
+  body.lp-ads .site-footer {
+    padding: 1.25rem 0 1.25rem;
+  }
+
+  body.lp-ads .site-footer__grid {
+    gap: 1rem;
+  }
+
+  body.lp-ads .site-footer__nap {
+    font-size: 0.85rem;
+    line-height: 1.55;
   }
 
   .testimonials__nav--prev { left: 0.15rem; }
