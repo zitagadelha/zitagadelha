@@ -355,8 +355,14 @@ body:not(.lp-ads) .hero::before {
   margin-bottom: 0;
 }
 
-.hero__note {
+.hero__notes {
   margin: 0.75rem 0 0;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.hero__note {
+  margin: 0;
   font-size: 0.85rem;
   font-weight: 500;
   line-height: 1.4;
@@ -1545,7 +1551,7 @@ body:not(.lp-ads) .hero::before {
     order: 5;
   }
 
-  .lp-ads .hero__note {
+  .lp-ads .hero__notes {
     order: 6;
     text-align: center;
   }
