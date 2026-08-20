@@ -355,6 +355,14 @@ body:not(.lp-ads) .hero::before {
   margin-bottom: 0;
 }
 
+.hero__note {
+  margin: 0.75rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--mauve);
+}
+
 .lp-ads .hero__lead {
   margin-bottom: 1rem;
 }
@@ -537,6 +545,7 @@ body:not(.lp-ads) .hero::before {
   line-height: 1.25;
   font-weight: 500;
   color: var(--mauve);
+  text-align: center;
 }
 
 .lp-ads .site-nav {
@@ -605,6 +614,26 @@ body:not(.lp-ads) .hero::before {
 }
 
 @media (max-width: 899px) {
+  .lp-ads .site-header__inner {
+    justify-content: space-between;
+  }
+
+  .lp-ads .site-header__tagline {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    flex: none;
+    width: max-content;
+    max-width: calc(100% - 8.5rem);
+    pointer-events: none;
+  }
+
+  .lp-ads .site-header__logo-link,
+  .lp-ads .site-nav__toggle {
+    position: relative;
+    z-index: 1;
+  }
+
   .lp-ads .site-nav__toggle {
     display: flex;
   }
@@ -1508,12 +1537,17 @@ body:not(.lp-ads) .hero::before {
     order: 4;
     align-self: stretch;
     width: 100%;
-    text-align: left;
+    text-align: center;
     margin-bottom: 0;
   }
 
   .lp-ads .hero__content > .btn {
     order: 5;
+  }
+
+  .lp-ads .hero__note {
+    order: 6;
+    text-align: center;
   }
 
   body.lp-ads .site-footer {
