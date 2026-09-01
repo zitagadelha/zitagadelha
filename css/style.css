@@ -1572,3 +1572,238 @@ body:not(.lp-ads) .hero::before {
   .testimonials__nav--prev { left: 0.15rem; }
   .testimonials__nav--next { right: 0.15rem; }
 }
+
+/* Newsletter */
+.newsletter__card {
+  max-width: 640px;
+  margin-inline: auto;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.newsletter__lead {
+  margin: 0 0 1.25rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.newsletter__form {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.newsletter__input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(156, 99, 111, 0.25);
+  border-radius: 10px;
+  font: inherit;
+}
+
+.newsletter__consent {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  justify-content: center;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--text);
+  text-align: left;
+}
+
+.newsletter__consent input {
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.newsletter__feedback {
+  margin: 0.85rem 0 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.newsletter__feedback--success {
+  color: var(--green);
+}
+
+.newsletter__feedback--error {
+  color: #b42318;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+@media (min-width: 640px) {
+  .newsletter__form {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+}
+
+/* Admin newsletter */
+.admin-email {
+  min-height: 100vh;
+  background: var(--bg-light);
+}
+
+.admin-email__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--mauve);
+  color: var(--white);
+}
+
+.admin-email__header strong {
+  display: block;
+  font-size: 1.05rem;
+}
+
+.admin-email__header span {
+  font-size: 0.82rem;
+  opacity: 0.85;
+}
+
+.admin-email__logout {
+  padding: 0.45rem 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--white);
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.admin-email__main {
+  width: min(100% - 2rem, 1100px);
+  margin-inline: auto;
+  padding: 1.5rem 0 2.5rem;
+}
+
+.admin-email__login-card {
+  max-width: 400px;
+  margin: 10vh auto 0;
+  padding: 2rem 1.75rem;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.admin-email__login-card h1 {
+  margin: 0 0 0.35rem;
+  font-size: 1.35rem;
+  color: var(--mauve);
+}
+
+.admin-email__login-card p {
+  margin: 0 0 1.25rem;
+  font-size: 0.92rem;
+  color: var(--text);
+}
+
+.admin-email__field {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 0.85rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.admin-email__field input,
+.admin-email__filters input,
+.admin-email__filters select {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid rgba(156, 99, 111, 0.25);
+  border-radius: 8px;
+  font: inherit;
+}
+
+.admin-email__alert {
+  margin-bottom: 0.85rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  color: #8d2020;
+  background: #ffe7e7;
+}
+
+.admin-email__filters {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.admin-email__export {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.admin-email__export .btn {
+  min-height: 40px;
+  padding: 0.55rem 1rem;
+  font-size: 0.85rem;
+}
+
+.admin-email__table-wrap {
+  overflow-x: auto;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.admin-email__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-email__table th,
+.admin-email__table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid rgba(156, 99, 111, 0.12);
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.admin-email__table th {
+  background: rgba(156, 99, 111, 0.08);
+  font-weight: 600;
+  color: var(--mauve);
+}
+
+.admin-email__table a {
+  color: var(--mauve);
+}
+
+.admin-email__empty {
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--text);
+}
+
+@media (min-width: 768px) {
+  .admin-email__filters {
+    grid-template-columns: 2fr 1fr 1fr 1fr auto;
+    align-items: end;
+  }
+}

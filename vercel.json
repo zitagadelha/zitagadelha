@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/email",
+      "destination": "/email.html"
+    },
+    {
       "source": "/psicologa-online",
       "destination": "/psicologa-online.html"
     },
@@ -37,6 +41,11 @@
     {
       "source": "/psicologa-para-mulheres.html",
       "destination": "/psicologa-para-mulheres",
+      "permanent": true
+    },
+    {
+      "source": "/email.html",
+      "destination": "/email",
       "permanent": true
     }
   ],

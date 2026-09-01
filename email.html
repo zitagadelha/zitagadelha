@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Newsletter | Zita Gadelha</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="IMG/logo.webp" type="image/webp">
+</head>
+<body class="admin-email">
+
+  <div id="login-view">
+    <main class="admin-email__login-card">
+      <h1>Newsletter</h1>
+      <p>Acesso administrativo</p>
+
+      <div class="admin-email__alert" id="admin-login-error" hidden></div>
+
+      <form id="admin-login-form">
+        <label class="admin-email__field" for="admin-email">
+          E-mail
+          <input type="email" id="admin-email" name="email" autocomplete="username" required>
+        </label>
+
+        <label class="admin-email__field" for="admin-password">
+          Senha
+          <input type="password" id="admin-password" name="password" autocomplete="current-password" required>
+        </label>
+
+        <button class="btn" type="submit">Entrar</button>
+      </form>
+    </main>
+  </div>
+
+  <div id="dashboard-view" hidden>
+    <header class="admin-email__header">
+      <div>
+        <strong>Newsletter</strong>
+        <span id="admin-count">0 inscritos no período</span>
+      </div>
+      <button class="admin-email__logout" type="button" id="admin-logout">Sair</button>
+    </header>
+
+    <main class="admin-email__main">
+      <form class="admin-email__filters" id="admin-filter-form">
+        <label class="admin-email__field" for="admin-search">
+          Buscar e-mail
+          <input type="search" id="admin-search" name="busca" placeholder="ex.: gmail.com">
+        </label>
+
+        <label class="admin-email__field" for="admin-period">
+          Período
+          <select id="admin-period" name="periodo">
+            <option value="3">Últimos 3 dias</option>
+            <option value="7">Últimos 7 dias</option>
+            <option value="30" selected>Últimos 30 dias</option>
+            <option value="personalizado">Personalizado</option>
+          </select>
+        </label>
+
+        <label class="admin-email__field" for="admin-start">
+          Início
+          <input type="date" id="admin-start" name="inicio" disabled>
+        </label>
+
+        <label class="admin-email__field" for="admin-end">
+          Fim
+          <input type="date" id="admin-end" name="fim" disabled>
+        </label>
+
+        <button class="btn" type="submit">Filtrar</button>
+      </form>
+
+      <div class="admin-email__export">
+        <button class="btn" type="button" id="export-csv">Exportar CSV</button>
+        <button class="btn" type="button" id="export-xlsx">Exportar XLSX</button>
+        <button class="btn" type="button" id="export-pdf">Exportar PDF</button>
+      </div>
+
+      <div class="admin-email__table-wrap">
+        <table class="admin-email__table">
+          <thead>
+            <tr>
+              <th>E-mail</th>
+              <th>Página</th>
+              <th>Cadastro</th>
+            </tr>
+          </thead>
+          <tbody id="admin-table-body">
+            <tr>
+              <td colspan="3" class="admin-email__empty">Carregando...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/admin-email.js" defer></script>
+</body>
+</html>

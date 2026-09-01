@@ -399,6 +399,39 @@ body:not(.lp-ads) .hero::before{content:"";position:absolute;inset:0;z-index:1;b
     </div>
   </section>
 
+  <section class="section section--light newsletter" id="newsletter" aria-labelledby="newsletter-title">
+    <div class="container">
+      <div class="newsletter__card">
+        <h2 class="section__title" id="newsletter-title">Receba conteúdos no seu e-mail</h2>
+        <p class="newsletter__lead">
+          Cadastre-se para receber reflexões e conteúdos sobre bem-estar emocional, no seu ritmo.
+        </p>
+
+        <form class="newsletter__form" id="newsletter-form" novalidate>
+          <label class="visually-hidden" for="newsletter-email">Seu e-mail</label>
+          <input
+            class="newsletter__input"
+            type="email"
+            id="newsletter-email"
+            name="email"
+            placeholder="Seu melhor e-mail"
+            autocomplete="email"
+            required
+          >
+          <button class="btn newsletter__submit" type="submit">Quero receber</button>
+        </form>
+
+        <label class="newsletter__consent">
+          <input type="checkbox" id="newsletter-consent" required>
+          Concordo em receber a newsletter e aceito a
+          <a href="privacy-policy.html">Política de Privacidade</a>.
+        </label>
+
+        <p class="newsletter__feedback" id="newsletter-feedback" role="status" aria-live="polite" hidden></p>
+      </div>
+    </div>
+  </section>
+
   <footer class="site-footer">
     <div class="container site-footer__grid">
       <img class="site-footer__logo" src="IMG/logo.webp" alt="Zita Gadelha Psicóloga" width="130" height="63" loading="lazy">
@@ -715,6 +748,9 @@ body:not(.lp-ads) .hero::before{content:"";position:absolute;inset:0;z-index:1;b
       }
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/newsletter.js" defer></script>
   <script src="js/main-lp.js" defer></script>
   <script src="js/consent.js" defer></script>
   <script>
