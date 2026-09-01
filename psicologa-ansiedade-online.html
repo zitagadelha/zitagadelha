@@ -402,24 +402,35 @@ body:not(.lp-ads) .hero::before{content:"";position:absolute;inset:0;z-index:1;b
   <section class="section section--light newsletter" id="newsletter" aria-labelledby="newsletter-title">
     <div class="container">
       <div class="newsletter__card">
-        <h2 class="section__title" id="newsletter-title">Receba conteúdos no seu e-mail</h2>
+        <p class="newsletter__eyebrow">Newsletter semanal · gratuita</p>
+        <h2 class="newsletter__title" id="newsletter-title">Um e-mail por semana para cuidar de você por dentro</h2>
         <p class="newsletter__lead">
-          Cadastre-se para receber reflexões e conteúdos sobre bem-estar emocional, no seu ritmo.
+          Receba reflexões, dicas práticas e conteúdos sobre bem-estar emocional — escritos com acolhimento, sem julgamentos e no seu ritmo.
         </p>
 
+        <ul class="newsletter__benefits">
+          <li>Como lidar com ansiedade, autoestima e relacionamentos</li>
+          <li>Insights que você pode aplicar na rotina do dia a dia</li>
+          <li>Novidades e conteúdos que não aparecem nas redes sociais</li>
+        </ul>
+
         <form class="newsletter__form" id="newsletter-form" novalidate>
-          <label class="visually-hidden" for="newsletter-email">Seu e-mail</label>
-          <input
-            class="newsletter__input"
-            type="email"
-            id="newsletter-email"
-            name="email"
-            placeholder="Seu melhor e-mail"
-            autocomplete="email"
-            required
-          >
-          <button class="btn newsletter__submit" type="submit">Quero receber</button>
+          <div class="newsletter__field">
+            <label class="newsletter__label" for="newsletter-email">Seu melhor e-mail</label>
+            <input
+              class="newsletter__input"
+              type="email"
+              id="newsletter-email"
+              name="email"
+              placeholder="seu@email.com"
+              autocomplete="email"
+              required
+            >
+          </div>
+          <button class="btn newsletter__submit" type="submit">Quero fazer parte</button>
         </form>
+
+        <p class="newsletter__note">Sem spam. Você pode sair da lista quando quiser.</p>
 
         <label class="newsletter__consent">
           <input type="checkbox" id="newsletter-consent" required>
