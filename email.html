@@ -5,31 +5,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>Newsletter | Zita Gadelha</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="IMG/logo.webp" type="image/webp">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="/IMG/logo.webp" type="image/webp">
 </head>
 <body class="admin-email">
 
-  <div id="login-view">
+  <div id="login-view" class="admin-email__login-screen">
     <main class="admin-email__login-card">
-      <h1>Newsletter</h1>
-      <p>Acesso administrativo</p>
+      <span class="admin-email__login-beam" aria-hidden="true"></span>
 
-      <div class="admin-email__alert" id="admin-login-error" hidden></div>
+      <div class="admin-email__login-inner">
+        <header class="admin-email__login-header">
+          <h1>Login</h1>
+          <p>Entre com suas credenciais para acessar a lista de inscritos da newsletter.</p>
+        </header>
 
-      <form id="admin-login-form">
-        <label class="admin-email__field" for="admin-email">
-          E-mail
-          <input type="email" id="admin-email" name="email" autocomplete="username" required>
-        </label>
+        <div class="admin-email__alert" id="admin-login-error" hidden></div>
 
-        <label class="admin-email__field" for="admin-password">
-          Senha
-          <input type="password" id="admin-password" name="password" autocomplete="current-password" required>
-        </label>
+        <form id="admin-login-form" class="admin-email__login-form">
+          <div class="admin-email__field">
+            <label for="admin-email">E-mail</label>
+            <input
+              type="email"
+              id="admin-email"
+              name="email"
+              placeholder="seu@email.com"
+              autocomplete="username"
+              required
+            >
+          </div>
 
-        <button class="btn" type="submit">Entrar</button>
-      </form>
+          <div class="admin-email__field">
+            <label for="admin-password">Senha</label>
+            <div class="admin-email__password-wrap">
+              <input
+                type="password"
+                id="admin-password"
+                name="password"
+                placeholder="Sua senha"
+                autocomplete="current-password"
+                required
+              >
+              <button
+                type="button"
+                class="admin-email__password-toggle"
+                id="admin-password-toggle"
+                aria-label="Mostrar senha"
+                aria-pressed="false"
+              >
+                <svg class="admin-email__icon-eye" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <svg class="admin-email__icon-eye-off" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden>
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-10-8-10-8a18.45 18.45 0 0 1 5.06-6.94"/>
+                  <path d="M1 1l22 22"/>
+                  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 10 8 10 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                  <path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <button class="btn admin-email__login-btn" type="submit">Entrar</button>
+        </form>
+      </div>
     </main>
   </div>
 
@@ -101,7 +141,7 @@
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js"></script>
-  <script src="js/supabase-config.js"></script>
-  <script src="js/admin-email.js" defer></script>
+  <script src="/js/supabase-config.js?v=2"></script>
+  <script src="/js/admin-email.js" defer></script>
 </body>
 </html>

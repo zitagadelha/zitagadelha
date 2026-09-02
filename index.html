@@ -403,47 +403,73 @@
     </div>
   </section>
 
-  <section class="section section--light newsletter" id="newsletter" aria-labelledby="newsletter-title">
-    <div class="container">
-      <div class="newsletter__card">
-        <p class="newsletter__eyebrow">Newsletter semanal · gratuita</p>
-        <h2 class="newsletter__title" id="newsletter-title">Um e-mail por semana para cuidar de você por dentro</h2>
-        <p class="newsletter__lead">
-          Receba reflexões, dicas práticas e conteúdos sobre bem-estar emocional — escritos com acolhimento, sem julgamentos e no seu ritmo.
+  <section class="nl-section" id="newsletter" aria-labelledby="nl-title">
+    <div class="nl-card">
+
+      <div class="nl-intro">
+        <span class="nl-badge">
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="1.8" y="4" width="16.4" height="12" rx="2.6"/>
+            <path d="M3 6l7 5 7-5"/>
+          </svg>
+          Newsletter semanal · gratuita
+        </span>
+
+        <h2 class="nl-title" id="nl-title">Um e-mail por semana para cuidar de você por dentro</h2>
+
+        <p class="nl-text">Receba reflexões, dicas práticas e conteúdos sobre bem-estar emocional. Escritos com acolhimento, sem julgamentos e no seu ritmo.</p>
+
+        <ul class="nl-benefits">
+          <li>
+            <span class="nl-check" aria-hidden="true">
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="#9c636f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>
+            </span>
+            Como lidar com ansiedade, autoestima e relacionamentos
+          </li>
+          <li>
+            <span class="nl-check" aria-hidden="true">
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="#9c636f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>
+            </span>
+            Insights que você pode aplicar na rotina do dia a dia
+          </li>
+          <li>
+            <span class="nl-check" aria-hidden="true">
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="#9c636f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>
+            </span>
+            Novidades e conteúdos que não aparecem nas redes sociais
+          </li>
+        </ul>
+      </div>
+
+      <form class="nl-form" id="newsletter-form" novalidate>
+        <label class="nl-label" for="newsletter-email">Seu melhor e-mail</label>
+
+        <div class="nl-field">
+          <svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="1.8" y="4" width="16.4" height="12" rx="2.6"/>
+            <path d="M3 6l7 5 7-5"/>
+          </svg>
+          <input type="email" id="newsletter-email" name="email" placeholder="seu@email.com" autocomplete="email" required>
+        </div>
+
+        <button type="submit" class="nl-btn">Quero fazer parte</button>
+
+        <p class="nl-note">
+          <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="8.5" width="12" height="8" rx="2.2"/>
+            <path d="M7 8.5V6.5a3 3 0 0 1 6 0v2"/>
+          </svg>
+          Sem spam. Você pode sair da lista quando quiser.
         </p>
 
-        <ul class="newsletter__benefits">
-          <li>Como lidar com ansiedade, autoestima e relacionamentos</li>
-          <li>Insights que você pode aplicar na rotina do dia a dia</li>
-          <li>Novidades e conteúdos que não aparecem nas redes sociais</li>
-        </ul>
-
-        <form class="newsletter__form" id="newsletter-form" novalidate>
-          <div class="newsletter__field">
-            <label class="newsletter__label" for="newsletter-email">Seu melhor e-mail</label>
-            <input
-              class="newsletter__input"
-              type="email"
-              id="newsletter-email"
-              name="email"
-              placeholder="seu@email.com"
-              autocomplete="email"
-              required
-            >
-          </div>
-          <button class="btn newsletter__submit" type="submit">Quero fazer parte</button>
-        </form>
-
-        <p class="newsletter__note">Sem spam. Você pode sair da lista quando quiser.</p>
-
-        <label class="newsletter__consent">
+        <label class="nl-consent">
           <input type="checkbox" id="newsletter-consent" required>
-          Concordo em receber a newsletter e aceito a
-          <a href="privacy-policy.html">Política de Privacidade</a>.
+          <span>Concordo em receber a newsletter e aceito a <a href="privacy-policy.html">Política de Privacidade</a>.</span>
         </label>
 
-        <p class="newsletter__feedback" id="newsletter-feedback" role="status" aria-live="polite" hidden></p>
-      </div>
+        <p class="nl-feedback" id="newsletter-feedback" role="status" aria-live="polite" hidden></p>
+      </form>
+
     </div>
   </section>
 
@@ -496,7 +522,7 @@
   </a>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/supabase-config.js"></script>
+  <script src="js/supabase-config.js?v=2"></script>
   <script src="js/newsletter.js" defer></script>
   <script src="js/main.js" defer></script>
   <script src="js/consent.js" defer></script>

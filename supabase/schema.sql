@@ -16,6 +16,11 @@ create index newsletter_subscribers_created_at_idx
 
 alter table public.newsletter_subscribers enable row level security;
 
+-- Permissões para a API (anon = visitantes; authenticated = admin logada)
+grant usage on schema public to anon, authenticated;
+grant insert on table public.newsletter_subscribers to anon;
+grant select on table public.newsletter_subscribers to authenticated;
+
 -- Visitantes podem APENAS inserir (não ler, não atualizar, não apagar)
 create policy "public_can_insert_subscribers"
   on public.newsletter_subscribers

@@ -10,8 +10,8 @@
     if (!feedback) return;
     feedback.hidden = false;
     feedback.textContent = text;
-    feedback.classList.toggle('newsletter__feedback--error', !!isError);
-    feedback.classList.toggle('newsletter__feedback--success', !isError);
+    feedback.classList.toggle('nl-feedback--error', !!isError);
+    feedback.classList.toggle('nl-feedback--success', !isError);
   }
 
   form.addEventListener('submit', async function (event) {
@@ -40,7 +40,11 @@
       });
 
       if (result.error) {
-        if (result.error.code === '23505') {
+        console.error('Newsletter signup error:', result.error);
+        if (
+          result.error.code === '23505' ||
+          /duplicate|unique/i.test(result.error.message || '')
+        ) {
           showMessage('Este e-mail já está cadastrado.', true);
         } else {
           showMessage('Não foi possível concluir o cadastro. Tente novamente.', true);
@@ -51,6 +55,7 @@
       form.reset();
       showMessage('Cadastro realizado com sucesso!', false);
     } catch (err) {
+      console.error('Newsletter signup exception:', err);
       showMessage('Erro de conexão. Tente novamente em instantes.', true);
     } finally {
       submitBtn.disabled = false;

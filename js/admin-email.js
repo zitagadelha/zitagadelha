@@ -14,6 +14,8 @@
   var exportCsv = document.getElementById('export-csv');
   var exportXlsx = document.getElementById('export-xlsx');
   var exportPdf = document.getElementById('export-pdf');
+  var passwordToggle = document.getElementById('admin-password-toggle');
+  var passwordInput = document.getElementById('admin-password');
 
   var currentRows = [];
 
@@ -264,9 +266,20 @@
       });
 
       if (result.error) {
+        console.error('Admin login error:', result.error);
         if (loginError) {
           loginError.hidden = false;
-          loginError.textContent = 'E-mail ou senha inválidos.';
+          var message = result.error.message || '';
+
+          if (/invalid login credentials/i.test(message)) {
+            loginError.textContent = 'E-mail ou senha inválidos. Confira se o usuário admin foi criado no Supabase.';
+          } else if (/email not confirmed/i.test(message)) {
+            loginError.textContent = 'E-mail ainda não confirmado no Supabase. Marque "Auto Confirm User" ao criar o usuário.';
+          } else if (/email provider.*disabled/i.test(message)) {
+            loginError.textContent = 'Login por e-mail está desativado no Supabase. Ative em Authentication → Providers → Email.';
+          } else {
+            loginError.textContent = 'Não foi possível entrar. Tente novamente em instantes.';
+          }
         }
         return;
       }
@@ -297,6 +310,21 @@
   if (exportCsv) exportCsv.addEventListener('click', exportAsCsv);
   if (exportXlsx) exportXlsx.addEventListener('click', exportAsXlsx);
   if (exportPdf) exportPdf.addEventListener('click', exportAsPdf);
+
+  if (passwordToggle && passwordInput) {
+    var eyeIcon = passwordToggle.querySelector('.admin-email__icon-eye');
+    var eyeOffIcon = passwordToggle.querySelector('.admin-email__icon-eye-off');
+
+    passwordToggle.addEventListener('click', function () {
+      var show = passwordInput.type === 'password';
+      passwordInput.type = show ? 'text' : 'password';
+      passwordToggle.setAttribute('aria-label', show ? 'Ocultar senha' : 'Mostrar senha');
+      passwordToggle.setAttribute('aria-pressed', show ? 'true' : 'false');
+      passwordToggle.classList.toggle('is-visible', show);
+      if (eyeIcon) eyeIcon.hidden = show;
+      if (eyeOffIcon) eyeOffIcon.hidden = !show;
+    });
+  }
 
   init();
 })();
