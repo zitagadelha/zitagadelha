@@ -8,7 +8,7 @@
   <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
   <meta name="referrer" content="no-referrer">
   <title>Login</title>
-  <link rel="stylesheet" href="/css/style.css?v=6">
+  <link rel="stylesheet" href="/css/style.css?v=7">
   <link rel="icon" href="/IMG/logo.webp" type="image/webp">
 </head>
 <body class="admin-email">
@@ -78,49 +78,46 @@
 
   <div id="dashboard-view" hidden>
     <header class="admin-email__header">
-      <div>
-        <strong>Newsletter</strong>
-        <span id="admin-count">0 inscritos no período</span>
+      <div class="admin-email__header-row">
+        <div>
+          <strong>Newsletter</strong>
+          <span id="admin-count">0 inscritos no período</span>
+        </div>
+        <button class="admin-email__logout" type="button" id="admin-logout">Sair</button>
       </div>
-      <button class="admin-email__logout" type="button" id="admin-logout">Sair</button>
+
+      <div class="admin-email__toolbar">
+        <form class="admin-email__filters" id="admin-filter-form">
+          <input
+            type="search"
+            id="admin-search"
+            name="busca"
+            placeholder="Buscar e-mail"
+            aria-label="Buscar e-mail"
+          >
+
+          <select id="admin-period" name="periodo" aria-label="Período">
+            <option value="7">7 dias</option>
+            <option value="14">14 dias</option>
+            <option value="30" selected>30 dias</option>
+            <option value="personalizado">Personalizado</option>
+          </select>
+
+          <input type="date" id="admin-start" name="inicio" aria-label="Data início" disabled>
+          <input type="date" id="admin-end" name="fim" aria-label="Data fim" disabled>
+
+          <button class="admin-email__btn-sm" type="submit">Filtrar</button>
+        </form>
+
+        <div class="admin-email__export">
+          <button class="admin-email__btn-sm admin-email__btn-ghost" type="button" id="export-csv">CSV</button>
+          <button class="admin-email__btn-sm admin-email__btn-ghost" type="button" id="export-xlsx">XLSX</button>
+          <button class="admin-email__btn-sm admin-email__btn-ghost" type="button" id="export-pdf">PDF</button>
+        </div>
+      </div>
     </header>
 
     <main class="admin-email__main">
-      <form class="admin-email__filters" id="admin-filter-form">
-        <label class="admin-email__field" for="admin-search">
-          Buscar e-mail
-          <input type="search" id="admin-search" name="busca" placeholder="ex.: gmail.com">
-        </label>
-
-        <label class="admin-email__field" for="admin-period">
-          Período
-          <select id="admin-period" name="periodo">
-            <option value="7">Últimos 7 dias</option>
-            <option value="14">Últimos 14 dias</option>
-            <option value="30" selected>Últimos 30 dias</option>
-            <option value="personalizado">Personalizado</option>
-          </select>
-        </label>
-
-        <label class="admin-email__field" for="admin-start">
-          Início
-          <input type="date" id="admin-start" name="inicio" disabled>
-        </label>
-
-        <label class="admin-email__field" for="admin-end">
-          Fim
-          <input type="date" id="admin-end" name="fim" disabled>
-        </label>
-
-        <button class="btn" type="submit">Filtrar</button>
-      </form>
-
-      <div class="admin-email__export">
-        <button class="btn" type="button" id="export-csv">Exportar CSV</button>
-        <button class="btn" type="button" id="export-xlsx">Exportar XLSX</button>
-        <button class="btn" type="button" id="export-pdf">Exportar PDF</button>
-      </div>
-
       <div class="admin-email__table-wrap">
         <table class="admin-email__table">
           <thead>
