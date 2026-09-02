@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /email
+Disallow: /email.html
 
 Sitemap: https://zitapsi.com.br/sitemap.xml

@@ -3,6 +3,7 @@
   var dashboardView = document.getElementById('dashboard-view');
   var loginForm = document.getElementById('admin-login-form');
   var loginError = document.getElementById('admin-login-error');
+  var loginSubmitBtn = loginForm ? loginForm.querySelector('button[type="submit"]') : null;
   var logoutBtn = document.getElementById('admin-logout');
   var filterForm = document.getElementById('admin-filter-form');
   var periodSelect = document.getElementById('admin-period');
@@ -18,19 +19,43 @@
   var passwordInput = document.getElementById('admin-password');
 
   var currentRows = [];
+  var client = null;
 
-  if (!window.getSupabaseClient) return;
+  function showLoginError(message) {
+    if (!loginError) return;
+    loginError.hidden = false;
+    loginError.textContent = message;
+  }
 
-  var client = window.getSupabaseClient();
+  function clearLoginError() {
+    if (!loginError) return;
+    loginError.hidden = true;
+    loginError.textContent = '';
+  }
+
+  function getClient() {
+    if (client) return client;
+
+    if (!window.getSupabaseClient) {
+      throw new Error('Configuração do Supabase não carregou. Recarregue a página.');
+    }
+
+    if (!window.supabase) {
+      throw new Error('Biblioteca do Supabase não carregou. Verifique sua conexão e recarregue.');
+    }
+
+    client = window.getSupabaseClient();
+    return client;
+  }
 
   function showLogin() {
-    loginView.hidden = false;
-    dashboardView.hidden = true;
+    if (loginView) loginView.hidden = false;
+    if (dashboardView) dashboardView.hidden = true;
   }
 
   function showDashboard() {
-    loginView.hidden = true;
-    dashboardView.hidden = false;
+    if (loginView) loginView.hidden = true;
+    if (dashboardView) dashboardView.hidden = false;
   }
 
   function formatDateTime(value) {
@@ -113,10 +138,11 @@
   }
 
   async function loadSubscribers() {
+    var supabaseClient = getClient();
     var range = getPeriodRange();
     var search = searchInput ? searchInput.value.trim() : '';
 
-    var query = client
+    var query = supabaseClient
       .from('newsletter_subscribers')
       .select('id, email, source_page, created_at')
       .gte('created_at', range.start.toISOString())
@@ -226,72 +252,105 @@
   async function init() {
     toggleCustomDates();
 
-    var sessionResult = await client.auth.getSession();
+    try {
+      var supabaseClient = getClient();
+      var sessionResult = await supabaseClient.auth.getSession();
 
-    if (sessionResult.data.session) {
-      showDashboard();
-      await loadSubscribers();
-    } else {
-      showLogin();
-    }
-
-    client.auth.onAuthStateChange(function (event) {
-      if (event === 'SIGNED_IN') {
+      if (sessionResult.data.session) {
         showDashboard();
-        loadSubscribers();
+        await loadSubscribers();
+      } else {
+        showLogin();
       }
 
-      if (event === 'SIGNED_OUT') {
-        showLogin();
-        renderTable([]);
-      }
-    });
+      supabaseClient.auth.onAuthStateChange(function (event) {
+        if (event === 'SIGNED_IN') {
+          showDashboard();
+          loadSubscribers();
+        }
+
+        if (event === 'SIGNED_OUT') {
+          showLogin();
+          renderTable([]);
+        }
+      });
+    } catch (err) {
+      console.error('Admin bootstrap error:', err);
+      showLogin();
+      showLoginError(err.message || 'Não foi possível iniciar o painel. Recarregue a página.');
+    }
   }
 
   if (loginForm) {
     loginForm.addEventListener('submit', async function (event) {
       event.preventDefault();
+      clearLoginError();
 
-      if (loginError) {
-        loginError.hidden = true;
-        loginError.textContent = '';
-      }
+      var emailInput = document.getElementById('admin-email');
+      var passwordField = document.getElementById('admin-password');
+      var email = emailInput ? emailInput.value.trim() : '';
+      var password = passwordField ? passwordField.value : '';
 
-      var email = document.getElementById('admin-email').value.trim();
-      var password = document.getElementById('admin-password').value;
-
-      var result = await client.auth.signInWithPassword({
-        email: email,
-        password: password
-      });
-
-      if (result.error) {
-        console.error('Admin login error:', result.error);
-        if (loginError) {
-          loginError.hidden = false;
-          var message = result.error.message || '';
-
-          if (/invalid login credentials/i.test(message)) {
-            loginError.textContent = 'E-mail ou senha inválidos. Confira se o usuário admin foi criado no Supabase.';
-          } else if (/email not confirmed/i.test(message)) {
-            loginError.textContent = 'E-mail ainda não confirmado no Supabase. Marque "Auto Confirm User" ao criar o usuário.';
-          } else if (/email provider.*disabled/i.test(message)) {
-            loginError.textContent = 'Login por e-mail está desativado no Supabase. Ative em Authentication → Providers → Email.';
-          } else {
-            loginError.textContent = 'Não foi possível entrar. Tente novamente em instantes.';
-          }
-        }
+      if (!email || !passwordField || !passwordField.checkValidity()) {
+        showLoginError('Informe um e-mail válido.');
         return;
       }
 
-      showDashboard();
-      await loadSubscribers();
+      if (!password) {
+        showLoginError('Informe a senha.');
+        return;
+      }
+
+      if (loginSubmitBtn) {
+        loginSubmitBtn.disabled = true;
+        loginSubmitBtn.textContent = 'Entrando...';
+      }
+
+      try {
+        var supabaseClient = getClient();
+        var result = await supabaseClient.auth.signInWithPassword({
+          email: email,
+          password: password
+        });
+
+        if (result.error) {
+          console.error('Admin login error:', result.error);
+          var message = result.error.message || '';
+
+          if (/invalid login credentials/i.test(message)) {
+            showLoginError('E-mail ou senha inválidos.');
+          } else if (/email not confirmed/i.test(message)) {
+            showLoginError('E-mail ainda não confirmado no Supabase. Marque "Auto Confirm User" ao criar o usuário.');
+          } else if (/email provider.*disabled/i.test(message)) {
+            showLoginError('Login por e-mail está desativado no Supabase. Ative em Authentication → Providers → Email.');
+          } else {
+            showLoginError('Não foi possível entrar. Tente novamente em instantes.');
+          }
+          return;
+        }
+
+        showDashboard();
+        await loadSubscribers();
+      } catch (err) {
+        console.error('Admin login exception:', err);
+        showLoginError(err.message || 'Erro ao conectar. Recarregue a página e tente novamente.');
+      } finally {
+        if (loginSubmitBtn) {
+          loginSubmitBtn.disabled = false;
+          loginSubmitBtn.textContent = 'Entrar';
+        }
+      }
     });
   }
 
   if (logoutBtn) {
     logoutBtn.addEventListener('click', async function () {
-      await client.auth.signOut();
+      try {
+        var supabaseClient = getClient();
+        await supabaseClient.auth.signOut();
+      } catch (err) {
+        console.error('Admin logout error:', err);
+      }
       showLogin();
     });
   }
@@ -299,7 +358,9 @@
   if (filterForm) {
     filterForm.addEventListener('submit', function (event) {
       event.preventDefault();
-      loadSubscribers();
+      loadSubscribers().catch(function (err) {
+        console.error('Filter error:', err);
+      });
     });
   }
 
@@ -312,17 +373,15 @@
   if (exportPdf) exportPdf.addEventListener('click', exportAsPdf);
 
   if (passwordToggle && passwordInput) {
-    var eyeIcon = passwordToggle.querySelector('.admin-email__icon-eye');
-    var eyeOffIcon = passwordToggle.querySelector('.admin-email__icon-eye-off');
+    passwordToggle.addEventListener('click', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
 
-    passwordToggle.addEventListener('click', function () {
       var show = passwordInput.type === 'password';
       passwordInput.type = show ? 'text' : 'password';
       passwordToggle.setAttribute('aria-label', show ? 'Ocultar senha' : 'Mostrar senha');
       passwordToggle.setAttribute('aria-pressed', show ? 'true' : 'false');
       passwordToggle.classList.toggle('is-visible', show);
-      if (eyeIcon) eyeIcon.hidden = show;
-      if (eyeOffIcon) eyeOffIcon.hidden = !show;
     });
   }
 

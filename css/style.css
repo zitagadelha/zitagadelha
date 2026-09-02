@@ -2097,11 +2097,17 @@ body:not(.lp-ads) .hero::before {
   padding-right: 2.75rem;
 }
 
+.admin-email__password-wrap input::-ms-reveal,
+.admin-email__password-wrap input::-ms-clear {
+  display: none;
+}
+
 .admin-email__password-toggle {
   position: absolute;
   top: 50%;
   right: 0.55rem;
   transform: translateY(-50%);
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2114,6 +2120,23 @@ body:not(.lp-ads) .hero::before {
   color: rgba(0, 0, 0, 0.45);
   cursor: pointer;
   transition: color 0.15s ease, background 0.15s ease;
+}
+
+.admin-email__password-toggle svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.admin-email__password-toggle .admin-email__icon-eye-off {
+  display: none;
+}
+
+.admin-email__password-toggle.is-visible .admin-email__icon-eye {
+  display: none;
+}
+
+.admin-email__password-toggle.is-visible .admin-email__icon-eye-off {
+  display: block;
 }
 
 .admin-email__password-toggle:hover {
