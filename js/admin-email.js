@@ -161,6 +161,9 @@
 
   function toggleCustomDates() {
     var isCustom = periodSelect && periodSelect.value === 'personalizado';
+    var datesWrap = document.getElementById('admin-dates');
+
+    if (datesWrap) datesWrap.hidden = !isCustom;
     if (customStart) customStart.disabled = !isCustom;
     if (customEnd) customEnd.disabled = !isCustom;
   }

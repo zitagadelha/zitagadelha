@@ -2155,40 +2155,208 @@ body:not(.lp-ads) .hero::before {
 }
 
 .admin-email__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem 1.25rem;
   background: var(--mauve);
   color: var(--white);
 }
 
-.admin-email__header strong {
-  display: block;
-  font-size: 1.05rem;
+.admin-email__bar {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.65rem 0.85rem;
+  padding: 0.6rem 1.25rem;
 }
 
-.admin-email__header span {
-  font-size: 0.82rem;
-  opacity: 0.85;
+.admin-email__brand {
+  flex-shrink: 0;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+
+.admin-email__brand strong {
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.admin-email__brand span {
+  font-size: 0.68rem;
+  opacity: 0.75;
+  margin-left: 0.4rem;
 }
 
 .admin-email__logout {
-  padding: 0.45rem 0.85rem;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 8px;
+  flex-shrink: 0;
+  padding: 0.28rem 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
   background: transparent;
   color: var(--white);
   font: inherit;
-  font-size: 0.82rem;
+  font-size: 0.68rem;
   cursor: pointer;
+  opacity: 0.9;
+  white-space: nowrap;
+}
+
+.admin-email__logout:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.admin-email__filters {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.35rem;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.admin-email__dates {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.admin-email__dates[hidden] {
+  display: none !important;
+}
+
+.admin-email__filters input,
+.admin-email__filters select {
+  width: auto;
+  min-height: 28px;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  font: inherit;
+  font-size: 0.68rem;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+  flex-shrink: 1;
+}
+
+.admin-email__filters input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.admin-email__filters select {
+  padding-right: 1.25rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.admin-email__filters select option {
+  color: #333;
+  background: #fff;
+}
+
+.admin-email__filters input[type="search"] {
+  width: 6.5rem;
+  min-width: 5rem;
+  max-width: 9rem;
+}
+
+.admin-email__filters input[type="date"] {
+  width: 6.5rem;
+  min-width: 5.5rem;
+  color-scheme: dark;
+}
+
+.admin-email__filters input:focus,
+.admin-email__filters select:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.admin-email__btn-sm {
+  flex-shrink: 0;
+  min-height: 28px;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.admin-email__btn-sm:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.admin-email__export {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.admin-email__export-label {
+  font-size: 0.65rem;
+  opacity: 0.65;
+  margin-right: 0.1rem;
+}
+
+.admin-email__export-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgba(255, 255, 255, 0.88);
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(255, 255, 255, 0.35);
+}
+
+.admin-email__export-link:hover {
+  color: #fff;
+  text-decoration-color: rgba(255, 255, 255, 0.7);
+}
+
+.admin-email__export-sep {
+  font-size: 0.65rem;
+  opacity: 0.45;
+  user-select: none;
+}
+
+@media (max-width: 960px) {
+  .admin-email__bar {
+    flex-wrap: wrap;
+    row-gap: 0.45rem;
+  }
+
+  .admin-email__brand {
+    flex: 1 1 auto;
+  }
+
+  .admin-email__filters {
+    order: 3;
+    flex: 1 1 100%;
+  }
+
+  .admin-email__export {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .admin-email__logout {
+    order: 1;
+  }
 }
 
 .admin-email__main {
-  width: min(100% - 2rem, 1100px);
+  width: min(100% - 1.5rem, 1100px);
   margin-inline: auto;
-  padding: 1.5rem 0 2.5rem;
+  padding: 0.85rem 0 2rem;
 }
 
 .admin-email__field {
@@ -2203,9 +2371,7 @@ body:not(.lp-ads) .hero::before {
   color: rgba(0, 0, 0, 0.72);
 }
 
-.admin-email__field input,
-.admin-email__filters input,
-.admin-email__filters select {
+.admin-email__field input {
   width: 100%;
   min-height: 44px;
   padding: 0.65rem 0.85rem;
@@ -2216,9 +2382,7 @@ body:not(.lp-ads) .hero::before {
   transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
 
-.admin-email__field input:focus,
-.admin-email__filters input:focus,
-.admin-email__filters select:focus {
+.admin-email__field input:focus {
   outline: none;
   border-color: var(--mauve);
   background: var(--white);
@@ -2236,25 +2400,6 @@ body:not(.lp-ads) .hero::before {
   font-size: 0.88rem;
   color: #8d2020;
   background: #ffe7e7;
-}
-
-.admin-email__filters {
-  display: grid;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-}
-
-.admin-email__export {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.admin-email__export .btn {
-  min-height: 40px;
-  padding: 0.55rem 1rem;
-  font-size: 0.85rem;
 }
 
 .admin-email__table-wrap {
@@ -2291,13 +2436,6 @@ body:not(.lp-ads) .hero::before {
   padding: 1.5rem;
   text-align: center;
   color: var(--text);
-}
-
-@media (min-width: 768px) {
-  .admin-email__filters {
-    grid-template-columns: 2fr 1fr 1fr 1fr auto;
-    align-items: end;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
