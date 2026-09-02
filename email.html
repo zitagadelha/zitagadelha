@@ -8,7 +8,7 @@
   <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
   <meta name="referrer" content="no-referrer">
   <title>Login</title>
-  <link rel="stylesheet" href="/css/style.css?v=3">
+  <link rel="stylesheet" href="/css/style.css?v=6">
   <link rel="icon" href="/IMG/logo.webp" type="image/webp">
 </head>
 <body class="admin-email">
@@ -27,10 +27,10 @@
 
         <form id="admin-login-form" class="admin-email__login-form">
           <div class="admin-email__field">
-            <label for="admin-email">E-mail</label>
+            <label for="admin-login-email">E-mail</label>
             <input
               type="email"
-              id="admin-email"
+              id="admin-login-email"
               name="email"
               placeholder="seu@email.com"
               autocomplete="username"
@@ -39,11 +39,11 @@
           </div>
 
           <div class="admin-email__field">
-            <label for="admin-password">Senha</label>
+            <label for="admin-login-password">Senha</label>
             <div class="admin-email__password-wrap">
               <input
                 type="password"
-                id="admin-password"
+                id="admin-login-password"
                 name="password"
                 placeholder="Sua senha"
                 autocomplete="current-password"
@@ -95,8 +95,8 @@
         <label class="admin-email__field" for="admin-period">
           Período
           <select id="admin-period" name="periodo">
-            <option value="3">Últimos 3 dias</option>
             <option value="7">Últimos 7 dias</option>
+            <option value="14">Últimos 14 dias</option>
             <option value="30" selected>Últimos 30 dias</option>
             <option value="personalizado">Personalizado</option>
           </select>
@@ -141,10 +141,10 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="/js/supabase-config.js?v=3"></script>
+  <script src="/js/supabase-config.js?v=5"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js" defer></script>
-  <script src="/js/admin-email.js?v=3" defer></script>
+  <script src="/js/admin-email.js?v=6" defer></script>
 </body>
 </html>

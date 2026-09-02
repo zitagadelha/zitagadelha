@@ -2002,6 +2002,11 @@ body:not(.lp-ads) .hero::before {
     var(--bg-light);
 }
 
+#login-view[hidden],
+#dashboard-view[hidden] {
+  display: none !important;
+}
+
 .admin-email__login-card {
   position: relative;
   width: min(100%, 380px);

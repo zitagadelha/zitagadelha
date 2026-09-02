@@ -16,7 +16,7 @@
   var exportXlsx = document.getElementById('export-xlsx');
   var exportPdf = document.getElementById('export-pdf');
   var passwordToggle = document.getElementById('admin-password-toggle');
-  var passwordInput = document.getElementById('admin-password');
+  var passwordInput = document.getElementById('admin-login-password');
 
   var currentRows = [];
   var client = null;
@@ -55,7 +55,69 @@
 
   function showDashboard() {
     if (loginView) loginView.hidden = true;
-    if (dashboardView) dashboardView.hidden = false;
+    if (dashboardView) {
+      dashboardView.hidden = false;
+    }
+  }
+
+  function withTimeout(promise, ms, message) {
+    return Promise.race([
+      promise,
+      new Promise(function (_, reject) {
+        setTimeout(function () {
+          reject(new Error(message || 'Tempo esgotado. Tente novamente.'));
+        }, ms);
+      })
+    ]);
+  }
+
+  function canUseLocalStorage() {
+    try {
+      var key = '__zita_auth_test__';
+      window.localStorage.setItem(key, '1');
+      window.localStorage.removeItem(key);
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  async function signInAdmin(email, password) {
+    var supabaseClient = getClient();
+    var response = await fetch(
+      window.SUPABASE_URL + '/auth/v1/token?grant_type=password',
+      {
+        method: 'POST',
+        headers: {
+          apikey: window.SUPABASE_ANON_KEY,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        })
+      }
+    );
+
+    var payload = await response.json().catch(function () {
+      return {};
+    });
+
+    if (!response.ok) {
+      var errMsg = payload.error_description || payload.msg || payload.message || 'E-mail ou senha inválidos.';
+      throw new Error(errMsg);
+    }
+
+    var sessionResult = await supabaseClient.auth.setSession({
+      access_token: payload.access_token,
+      refresh_token: payload.refresh_token
+    });
+
+    if (sessionResult.error) {
+      throw sessionResult.error;
+    }
+
+    return sessionResult;
   }
 
   function formatDateTime(value) {
@@ -89,7 +151,7 @@
       }
     }
 
-    var days = ['3', '7', '30'].indexOf(period) !== -1 ? parseInt(period, 10) : 30;
+    var days = ['7', '14', '30'].indexOf(period) !== -1 ? parseInt(period, 10) : 30;
     var start = new Date();
     start.setHours(0, 0, 0, 0);
     start.setDate(start.getDate() - (days - 1));
@@ -286,8 +348,8 @@
       event.preventDefault();
       clearLoginError();
 
-      var emailInput = document.getElementById('admin-email');
-      var passwordField = document.getElementById('admin-password');
+      var emailInput = document.getElementById('admin-login-email');
+      var passwordField = document.getElementById('admin-login-password');
       var email = emailInput ? emailInput.value.trim() : '';
       var password = passwordField ? passwordField.value : '';
 
@@ -301,39 +363,38 @@
         return;
       }
 
+      if (!canUseLocalStorage()) {
+        showLoginError('O navegador bloqueou o armazenamento local. Desative o modo anônimo ou permita cookies para este site.');
+        return;
+      }
+
       if (loginSubmitBtn) {
         loginSubmitBtn.disabled = true;
         loginSubmitBtn.textContent = 'Entrando...';
       }
 
       try {
-        var supabaseClient = getClient();
-        var result = await supabaseClient.auth.signInWithPassword({
-          email: email,
-          password: password
-        });
-
-        if (result.error) {
-          console.error('Admin login error:', result.error);
-          var message = result.error.message || '';
-
-          if (/invalid login credentials/i.test(message)) {
-            showLoginError('E-mail ou senha inválidos.');
-          } else if (/email not confirmed/i.test(message)) {
-            showLoginError('E-mail ainda não confirmado no Supabase. Marque "Auto Confirm User" ao criar o usuário.');
-          } else if (/email provider.*disabled/i.test(message)) {
-            showLoginError('Login por e-mail está desativado no Supabase. Ative em Authentication → Providers → Email.');
-          } else {
-            showLoginError('Não foi possível entrar. Tente novamente em instantes.');
-          }
-          return;
-        }
+        await withTimeout(
+          signInAdmin(email, password),
+          20000,
+          'O servidor demorou para responder. Verifique sua internet e tente novamente.'
+        );
 
         showDashboard();
         await loadSubscribers();
       } catch (err) {
         console.error('Admin login exception:', err);
-        showLoginError(err.message || 'Erro ao conectar. Recarregue a página e tente novamente.');
+        var message = err && err.message ? err.message : '';
+
+        if (/invalid login credentials/i.test(message)) {
+          showLoginError('E-mail ou senha inválidos.');
+        } else if (/email not confirmed/i.test(message)) {
+          showLoginError('E-mail ainda não confirmado. Recrie o usuário com "Auto Confirm User" marcado.');
+        } else if (/email provider.*disabled/i.test(message)) {
+          showLoginError('Login por e-mail desativado no Supabase. Ative em Authentication → Providers → Email.');
+        } else {
+          showLoginError(message || 'Erro ao conectar. Recarregue a página e tente novamente.');
+        }
       } finally {
         if (loginSubmitBtn) {
           loginSubmitBtn.disabled = false;

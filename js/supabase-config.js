@@ -10,7 +10,14 @@ window.getSupabaseClient = function () {
   if (!window.__supabaseClient) {
     window.__supabaseClient = window.supabase.createClient(
       window.SUPABASE_URL,
-      window.SUPABASE_ANON_KEY
+      window.SUPABASE_ANON_KEY,
+      {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: false
+        }
+      }
     );
   }
   return window.__supabaseClient;
