@@ -471,6 +471,87 @@
     </div>
   </section>
 
+  <section class="ebook-section" id="guia" aria-labelledby="ebook-title">
+    <div class="ebook-card">
+      <div class="ebook-intro">
+        <span class="ebook-badge">
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 2.5h6.5L16 6v11.5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1z"/>
+            <path d="M12.5 2.5V6H16"/>
+          </svg>
+          Guia gratuito · PDF
+        </span>
+
+        <h2 class="ebook-title" id="ebook-title">Um guia breve para se compreender melhor</h2>
+        <p class="ebook-text">20 páginas com 5 temas que costumam aparecer nos atendimentos, com auto-observação e caminhos práticos para refletir no seu ritmo.</p>
+
+        <ul class="ebook-themes">
+          <li>Ansiedade</li>
+          <li>Autoestima</li>
+          <li>Insegurança e decisões</li>
+          <li>Posicionamento</li>
+          <li>Relacionamentos</li>
+        </ul>
+      </div>
+
+      <div class="ebook-aside">
+        <div class="ebook-preview" aria-hidden="true">
+          <span class="ebook-preview__doc">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 3h7l5 5v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/>
+              <path d="M14 3v5h5"/>
+              <path d="M9 13h6M9 17h6"/>
+            </svg>
+          </span>
+          <div>
+            <strong>Guia em PDF</strong>
+            <span>20 páginas · gratuito</span>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="ebook-btn"
+          id="ebook-open"
+          data-ebook-pdf="downloads/guia-breve-autoconhecimento.pdf"
+        >
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M10 3.5v9"/>
+            <path d="M6.5 9.5L10 13l3.5-3.5"/>
+            <path d="M4 15.5h12"/>
+          </svg>
+          Baixar guia gratuito
+        </button>
+        <p class="ebook-note">Informe seu e-mail para liberar o download.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="ebook-modal" id="ebook-modal" hidden>
+    <button type="button" class="ebook-modal__backdrop" data-ebook-close aria-label="Fechar"></button>
+    <div class="ebook-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="ebook-modal-label">
+      <button type="button" class="ebook-modal__close" data-ebook-close aria-label="Fechar">&times;</button>
+
+      <form id="ebook-form" novalidate>
+        <label class="ebook-modal__label" id="ebook-modal-label" for="ebook-email">Seu e-mail</label>
+
+        <div class="ebook-modal__field">
+          <svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="1.8" y="4" width="16.4" height="12" rx="2.6"/>
+            <path d="M3 6l7 5 7-5"/>
+          </svg>
+          <input type="email" id="ebook-email" name="email" placeholder="seu@email.com" autocomplete="email" required>
+        </div>
+
+        <p class="ebook-modal__hint">Verifique seu e-mail com o código</p>
+
+        <button type="submit" class="ebook-modal__btn" disabled>Baixar PDF gratuitamente</button>
+
+        <p class="ebook-modal__feedback" id="ebook-feedback" role="status" aria-live="polite" hidden></p>
+      </form>
+    </div>
+  </div>
+
   <footer class="site-footer">
     <div class="container site-footer__grid">
       <img class="site-footer__logo" src="IMG/logo.webp" alt="Zita Gadelha Psicóloga" width="130" height="63" loading="lazy">
@@ -522,6 +603,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase-config.js?v=2"></script>
   <script src="js/newsletter.js" defer></script>
+  <script src="js/ebook.js" defer></script>
   <script src="js/main.js" defer></script>
   <script src="js/consent.js" defer></script>
 </body>
