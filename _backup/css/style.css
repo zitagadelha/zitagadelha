@@ -89,25 +89,15 @@ html {
 
 body.lp-ads {
   scroll-padding-top: 5.5rem;
-  --paper: #FBF8F6;
-  --ink: #171214;
-  --ink-2: #544A4D;
-  --mauve: #8E5A66;
-  --rule: #DED0CD;
-  --green: #1C7A45;
-  --panel: #E7DAD6;
-  --text: #171214;
-  --white: #fff;
-  font-family: "Karla", system-ui, sans-serif;
-  color: #171214;
-  background: #FBF8F6;
+  font-family: "Montserrat", system-ui, sans-serif;
+  color: #2a2a2a;
 }
 
 body.lp-ads .hero__title,
 body.lp-ads .section__title,
 body.lp-ads .cta-final h2 {
-  font-family: "Fraunces", Georgia, serif;
-  font-weight: 500;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 600;
   letter-spacing: -0.01em;
 }
 

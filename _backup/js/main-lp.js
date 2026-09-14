@@ -49,26 +49,4 @@
       });
     });
   }
-
-  const foldNavToggle = document.getElementById("fold-nav-toggle");
-  const foldNavMenu = document.getElementById("fold-nav-menu");
-
-  if (foldNavToggle && foldNavMenu) {
-    foldNavToggle.addEventListener("click", () => {
-      const isOpen = foldNavMenu.classList.toggle("is-open");
-      foldNavToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-      foldNavToggle.setAttribute(
-        "aria-label",
-        isOpen ? "Fechar menu de navegação" : "Abrir menu de navegação"
-      );
-    });
-
-    foldNavMenu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        foldNavMenu.classList.remove("is-open");
-        foldNavToggle.setAttribute("aria-expanded", "false");
-        foldNavToggle.setAttribute("aria-label", "Abrir menu de navegação");
-      });
-    });
-  }
 })();

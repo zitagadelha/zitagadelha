@@ -19,22 +19,7 @@
   var accept = document.getElementById("cookie-accept");
   if (!banner || !accept) return;
 
-  var shown = false;
-  function showBanner() {
-    if (shown) return;
-    shown = true;
-    document.body.classList.add("has-cookie-banner");
-    banner.hidden = false;
-    window.removeEventListener("scroll", onScroll, { passive: true });
-  }
-
-  function onScroll() {
-    if (window.scrollY > 120) showBanner();
-  }
-
-  window.addEventListener("scroll", onScroll, { passive: true });
-  setTimeout(showBanner, 8000);
-
+  banner.hidden = false;
   accept.addEventListener("click", function () {
     try {
       localStorage.setItem(KEY, "granted");
@@ -43,6 +28,5 @@
     }
     grantConsent();
     banner.hidden = true;
-    document.body.classList.remove("has-cookie-banner");
   });
 })();

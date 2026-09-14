@@ -1,4 +1,4 @@
--- Recria o usuário admin para login em zitapsi.com.br/email
+-- Recria o usuário admin para login em www.zitapsi.com.br/email
 -- Rode no SQL Editor do Supabase (Authentication → Users deve ficar com 1 usuário)
 --
 -- ANTES: Authentication → Sign In / Providers → Email → "Enable email provider" LIGADO → Save
