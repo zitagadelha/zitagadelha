@@ -983,6 +983,11 @@ body:not(.lp-ads) .hero::before {
   margin-top: 1.75rem;
 }
 
+.online__footer .hero__notes,
+.cta-final__btn .hero__notes {
+  justify-items: center;
+}
+
 .online__subtitle {
   color: var(--text);
   font-size: 1rem;
@@ -1507,6 +1512,10 @@ body:not(.lp-ads) .hero::before {
   .about__content,
   .split__content {
     text-align: center;
+  }
+
+  .about__content .hero__notes {
+    justify-items: center;
   }
 
   .split__content .btn,
