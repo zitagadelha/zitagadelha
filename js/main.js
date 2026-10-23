@@ -11,6 +11,31 @@
     // Clique rastreado em js/wa-track.js (evento dataLayer: whatsapp_click)
   });
 
+  // Botão flutuante fica escondido enquanto a foto do topo está na tela
+  const fab = document.querySelector(".whatsapp-float.is-hidden");
+  const introVisual = document.querySelector(".intro__visual");
+  if (fab && introVisual && "IntersectionObserver" in window) {
+    new IntersectionObserver(([entry]) => {
+      fab.classList.toggle("is-hidden", entry.isIntersecting);
+    }).observe(introVisual);
+  } else if (fab) {
+    fab.classList.remove("is-hidden");
+  }
+
+  // Reels: cabeçalho + vídeo 4:5 + "Ver mais". A foto é mais baixa, então o recorte sobe e as curtidas ficam de fora.
+  const igEmbeds = document.querySelectorAll(".ig__embed");
+  if (igEmbeds.length && "ResizeObserver" in window) {
+    const igResize = new ResizeObserver((entries) => {
+      entries.forEach(({ target, contentRect }) => {
+        const isPost = target.classList.contains("ig__embed--post");
+        const media = Math.round(contentRect.width * (isPost ? 0.88 : 1.25));
+        target.style.height = media + (isPost ? 140 : 98) + "px";
+        target.firstElementChild.style.height = media + 220 + "px";
+      });
+    });
+    igEmbeds.forEach((el) => igResize.observe(el));
+  }
+
   document.querySelectorAll(".faq__question").forEach((btn) => {
     btn.addEventListener("click", () => {
       const item = btn.closest(".faq__item");
