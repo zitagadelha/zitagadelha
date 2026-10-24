@@ -115,10 +115,6 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=0, must-revalidate"
-        },
-        {
-          "key": "Link",
-          "value": "</IMG/hero-zita.webp>; rel=preload; as=image; fetchpriority=high"
         }
       ]
     },
@@ -128,10 +124,6 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=0, must-revalidate"
-        },
-        {
-          "key": "Link",
-          "value": "</IMG/hero-zita.webp>; rel=preload; as=image; fetchpriority=high"
         }
       ]
     },
@@ -141,10 +133,6 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=0, must-revalidate"
-        },
-        {
-          "key": "Link",
-          "value": "</IMG/hero-zita.webp>; rel=preload; as=image; fetchpriority=high"
         }
       ]
     },
@@ -154,10 +142,6 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=0, must-revalidate"
-        },
-        {
-          "key": "Link",
-          "value": "</IMG/hero-zita.webp>; rel=preload; as=image; fetchpriority=high"
         }
       ]
     },

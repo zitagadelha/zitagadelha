@@ -56,8 +56,8 @@
   --mauve: #9e6772;
   --mauve-dark: #8a5561;
   --mauve-light: #f5ecee;
-  --green: #56b168;
-  --green-hover: #4aa35c;
+  --green: #1c7a45;
+  --green-hover: #166238;
   --text: #000000;
   --white: #ffffff;
   --cream: #fdfcfb;
@@ -289,7 +289,7 @@ body:not(.lp-ads) .site-header {
 .site-nav a:not(.btn) {
   font-size: 0.82rem;
   font-weight: 500;
-  color: var(--mauve);
+  color: #865360;
   white-space: nowrap;
   transition: opacity 0.2s;
 }
@@ -396,7 +396,7 @@ body:not(.lp-ads) .hero::before {
   font-size: 0.85rem;
   font-weight: 500;
   line-height: 1.4;
-  color: var(--mauve);
+  color: #865360;
 }
 
 .intro__copy,
@@ -477,7 +477,7 @@ body:not(.lp-ads) .hero__notes {
 
 .how__kicker {
   margin: 0;
-  color: #9a8084;
+  color: #7d6367;
   font-size: calc(7.7 * var(--u));
   letter-spacing: 0.2em;
   line-height: calc(11 * var(--u));
@@ -543,7 +543,7 @@ body:not(.lp-ads) .hero__notes {
   font-family: "Gentium Book Plus", Georgia, serif;
   font-size: calc(16 * var(--u));
   line-height: 1;
-  color: #a07a80;
+  color: #7f5c63;
 }
 
 .how__text h3 {
@@ -613,7 +613,7 @@ body:not(.lp-ads) .hero__notes {
 }
 
 .how__close p span {
-  color: #98767d;
+  color: #744a55;
 }
 
 .how .btn,
@@ -746,7 +746,7 @@ body:not(.lp-ads) .hero__notes {
 
 .bio__kicker {
   margin: 0;
-  color: #9a7f83;
+  color: #7d6367;
   font-size: calc(18.6 * var(--u));
   letter-spacing: 0.21em;
   line-height: calc(24 * var(--u));
@@ -792,7 +792,7 @@ body:not(.lp-ads) .hero__notes {
 
 .bio__role {
   margin: calc(16 * var(--u)) 0 0;
-  color: #827473;
+  color: #6b5f5e;
   font-size: calc(18.3 * var(--u));
   letter-spacing: 0.2em;
   line-height: calc(30 * var(--u));
@@ -894,7 +894,7 @@ body:not(.lp-ads) .hero__notes {
 .bio__facts strong {
   display: block;
   margin-top: calc(22 * var(--u));
-  color: #a47f86;
+  color: #7a5a61;
   font-size: calc(17.5 * var(--u));
   font-weight: 500;
   letter-spacing: 0.2em;
@@ -904,7 +904,7 @@ body:not(.lp-ads) .hero__notes {
 
 .bio__facts p {
   margin: calc(11 * var(--u)) 0 0;
-  color: #746967;
+  color: #5f5553;
   font-size: calc(20 * var(--u));
   line-height: calc(28 * var(--u));
 }
@@ -1030,7 +1030,7 @@ body:not(.lp-ads) .hero__notes {
 
 .faq__kicker {
   margin: 0;
-  color: #9a7f83;
+  color: #7d6367;
   font-size: 12px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -1091,7 +1091,7 @@ body:not(.lp-ads) .hero__notes {
   font-family: "Gentium Book Plus", Georgia, serif;
   font-size: 17px;
   font-weight: 400;
-  color: #a07a80;
+  color: #7f5c63;
 }
 
 .faq__q {
@@ -2604,21 +2604,21 @@ body:not(.lp-ads) .hero__notes {
 
 /* Lead magnet: Entre Nós Duas + guia */
 .lead-section {
-  --lead-mauve: #9c636f;
+  --lead-mauve: #865360;
   --lead-mauve-dark: #7c4a55;
   --lead-mauve-tint: #f7eef0;
   --lead-ink: #2d282a;
   --lead-body: #6e6669;
-  --lead-muted: #8e8588;
+  --lead-muted: #6b6366;
   --lead-border: #ebe4e5;
   --lead-bg: #efeae6;
   --lead-white: #fff;
-  --lead-serif: "Cormorant Garamond", "Times New Roman", serif;
+  --lead-serif: "EB Garamond", Georgia, serif;
 
   position: relative;
   background: var(--lead-bg);
   padding: 48px 18px 72px;
-  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -2660,7 +2660,7 @@ body:not(.lp-ads) .hero__notes {
   font-family: var(--lead-serif);
   font-size: clamp(1.9rem, 4vw, 2.55rem);
   line-height: 1.1;
-  font-weight: 700;
+  font-weight: 500;
   color: var(--lead-ink);
   letter-spacing: -0.02em;
 }

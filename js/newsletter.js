@@ -30,6 +30,26 @@
     );
   }
 
+  // A biblioteca do Supabase (~47 KB) só é baixada quando a pessoa interage com o formulário
+  var supabasePromise = null;
+  function loadSupabase() {
+    if (window.supabase && window.supabase.createClient) return Promise.resolve();
+    if (!supabasePromise) {
+      supabasePromise = new Promise(function (resolve, reject) {
+        var script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+        script.onload = resolve;
+        script.onerror = function () {
+          supabasePromise = null;
+          reject(new Error('Biblioteca do Supabase não carregou.'));
+        };
+        document.head.appendChild(script);
+      });
+    }
+    return supabasePromise;
+  }
+  form.addEventListener('focusin', function () { loadSupabase().catch(function () {}); }, { once: true });
+
   function openPdf(pdfWindow) {
     if (pdfWindow) {
       pdfWindow.opener = null;
@@ -62,6 +82,7 @@
     var pdfWindow = window.open('', '_blank');
 
     try {
+      await loadSupabase();
       var client = window.getSupabaseClient();
       var result = await client.from('newsletter_subscribers').insert({
         email: email,
