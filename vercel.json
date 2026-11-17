@@ -19,6 +19,10 @@
     {
       "source": "/psicologa-para-mulheres",
       "destination": "/psicologa-para-mulheres.html"
+    },
+    {
+      "source": "/terapia-online-particular",
+      "destination": "/terapia-online-particular.html"
     }
   ],
   "redirects": [
@@ -49,17 +53,22 @@
     },
     {
       "source": "/psicologa-ansiedade-online",
-      "destination": "/psicologa-autoestima",
+      "destination": "/psicologa-ansiedade",
       "permanent": true
     },
     {
       "source": "/psicologa-ansiedade-online.html",
-      "destination": "/psicologa-autoestima",
+      "destination": "/psicologa-ansiedade",
       "permanent": true
     },
     {
       "source": "/psicologa-para-mulheres.html",
       "destination": "/psicologa-para-mulheres",
+      "permanent": true
+    },
+    {
+      "source": "/terapia-online-particular.html",
+      "destination": "/terapia-online-particular",
       "permanent": true
     },
     {
@@ -69,6 +78,24 @@
     }
   ],
   "headers": [
+    {
+      "source": "/(llms|llms-full).txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "source": "/(.*).md",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/markdown; charset=utf-8"
+        }
+      ]
+    },
     {
       "source": "/email",
       "headers": [
@@ -138,6 +165,15 @@
     },
     {
       "source": "/psicologa-para-mulheres",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/terapia-online-particular",
       "headers": [
         {
           "key": "Cache-Control",

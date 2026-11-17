@@ -690,6 +690,217 @@ body:not(.lp-ads) .hero__notes {
   }
 }
 
+/* Para quem é / não é: arte da cliente, abaixo das etapas */
+.fit {
+  margin: calc(28 * var(--u)) calc(26 * var(--u)) 0;
+  font-family: "Outfit", system-ui, sans-serif;
+  color: #3c2c2e;
+  text-align: left;
+}
+
+.fit__kicker {
+  margin: 0;
+  color: #9d6872;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  line-height: 1.3;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.fit__title {
+  margin: 0.55rem 0 0;
+  color: #3c2c2e;
+  font-size: clamp(1.85rem, 5.2vw, 2.55rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  text-align: center;
+}
+
+.fit__rule {
+  display: block;
+  width: 72px;
+  height: 3px;
+  margin: 0.9rem auto 0;
+  border-radius: 2px;
+  background: #b07d88;
+}
+
+.fit__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  gap: 10px;
+  margin-top: 1.15rem;
+}
+
+.fit__card {
+  margin: 0;
+  min-width: 0;
+  padding: 0.85rem 0.7rem 1rem;
+  border-radius: 16px;
+  background: #fcf7f6;
+  box-shadow: 0 10px 28px rgba(90, 60, 65, 0.05);
+}
+
+.fit__badge {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #f3e6e4;
+  color: #a56b76;
+}
+
+.fit__badge svg {
+  width: 18px;
+  height: 18px;
+}
+
+.fit__card h3 {
+  margin: 0.65rem 0 0;
+  color: #3c2c2e;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.fit__card ul {
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+  margin: 0.7rem 0 0;
+  padding: 0.7rem 0 0;
+  border-top: 1px solid #e3d9d9;
+}
+
+.fit__card li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  min-width: 0;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.35;
+  color: #3a3032;
+}
+
+.fit__card li span:last-child {
+  min-width: 0;
+}
+
+.fit__mark {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 0.05rem;
+  border-radius: 50%;
+  background: #f4e4e3;
+  color: #a56b76;
+}
+
+.fit__mark svg {
+  width: 11px;
+  height: 11px;
+}
+
+.fit__freq {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 14px 0 0;
+  padding: 1.05rem 1.2rem;
+  border-radius: 18px;
+  background: #f3e4e6;
+  color: #3c2c2e;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.fit__freq svg {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  color: #a56b76;
+}
+
+.fit__freq span {
+  padding-left: 0.9rem;
+  border-left: 1px solid #d4c2c4;
+}
+
+.fit__freq strong {
+  font-weight: 600;
+}
+
+@media (min-width: 680px) {
+  .fit__grid {
+    gap: 14px;
+    margin-top: 1.45rem;
+  }
+
+  .fit__card {
+    padding: 1.35rem 1.25rem 1.45rem;
+    border-radius: 22px;
+  }
+
+  .fit__badge {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+  }
+
+  .fit__badge svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .fit__card h3 {
+    margin-top: 0.95rem;
+    font-size: 1.55rem;
+  }
+
+  .fit__card ul {
+    gap: 1.15rem;
+    margin-top: 1rem;
+    padding-top: 1.15rem;
+  }
+
+  .fit__card li {
+    gap: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .fit__mark {
+    width: 28px;
+    height: 28px;
+  }
+
+  .fit__mark svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+@media (min-width: 960px) {
+  .fit {
+    width: min(100%, 700px);
+    margin: 2.5rem auto 0;
+  }
+
+  .how .btn,
+  .how .hero__notes {
+    margin-left: max(0px, calc((100% - 700px) / 2));
+  }
+}
+
 /* Sobre mim (seção 3): medidas da referência de 1076px */
 .bio {
   --u: calc(100vw / 1076);
@@ -2406,6 +2617,18 @@ body:not(.lp-ads) .hero__notes {
 .cookie-banner a {
   color: var(--mauve);
   text-decoration: underline;
+}
+
+.cookie-banner__refuse {
+  background: none;
+  border: 0;
+  padding: 0 0.4rem;
+  min-height: 34px;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--text);
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 /* WhatsApp float */
