@@ -10,13 +10,19 @@
     });
   }
 
-  if (localStorage.getItem(KEY) === "granted") {
+  var salvo = null;
+  try {
+    salvo = localStorage.getItem(KEY);
+  } catch (e) {}
+  if (salvo === "granted") {
     grantConsent();
     return;
   }
+  if (salvo === "denied") return;
 
   var banner = document.getElementById("cookie-banner");
   var accept = document.getElementById("cookie-accept");
+  var refuse = document.getElementById("cookie-refuse");
   if (!banner || !accept) return;
 
   var shown = false;
@@ -34,6 +40,20 @@
 
   window.addEventListener("scroll", onScroll, { passive: true });
   setTimeout(showBanner, 8000);
+
+  function fechar() {
+    banner.hidden = true;
+    document.body.classList.remove("has-cookie-banner");
+  }
+
+  if (refuse) {
+    refuse.addEventListener("click", function () {
+      try {
+        localStorage.setItem(KEY, "denied");
+      } catch (e) {}
+      fechar();
+    });
+  }
 
   accept.addEventListener("click", function () {
     try {

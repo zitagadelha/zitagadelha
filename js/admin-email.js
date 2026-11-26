@@ -11,15 +11,22 @@
   var customEnd = document.getElementById('admin-end');
   var searchInput = document.getElementById('admin-search');
   var countEl = document.getElementById('admin-count');
+  var tableHead = document.getElementById('admin-table-head');
   var tableBody = document.getElementById('admin-table-body');
   var exportCsv = document.getElementById('export-csv');
   var exportXlsx = document.getElementById('export-xlsx');
   var exportPdf = document.getElementById('export-pdf');
   var passwordToggle = document.getElementById('admin-password-toggle');
   var passwordInput = document.getElementById('admin-login-password');
+  var tabButtons = document.querySelectorAll('[data-admin-tab]');
 
   var currentRows = [];
+  var currentView = 'newsletter';
   var client = null;
+
+  function isWhatsAppView() {
+    return currentView === 'whatsapp';
+  }
 
   function showLoginError(message) {
     if (!loginError) return;
@@ -151,7 +158,11 @@
       }
     }
 
-    var days = ['7', '14', '30'].indexOf(period) !== -1 ? parseInt(period, 10) : 30;
+    if (period === 'todos') {
+      return { start: null, end: end };
+    }
+
+    var days = ['7', '14', '30', '60', '90'].indexOf(period) !== -1 ? parseInt(period, 10) : 30;
     var start = new Date();
     start.setHours(0, 0, 0, 0);
     start.setDate(start.getDate() - (days - 1));
@@ -168,18 +179,53 @@
     if (customEnd) customEnd.disabled = !isCustom;
   }
 
+  function shortText(value, max) {
+    var text = String(value || '').replace(/\s+/g, ' ').trim();
+    if (text.length <= max) return text;
+    return text.slice(0, max - 1) + '…';
+  }
+
+  function syncTableHead() {
+    if (!tableHead) return;
+    if (isWhatsAppView()) {
+      tableHead.innerHTML = '<tr><th>Nome</th><th>Cadastro</th><th></th></tr>';
+      return;
+    }
+    tableHead.innerHTML = '<tr><th>E-mail</th><th>Página</th><th>Cadastro</th></tr>';
+  }
+
   function renderTable(rows) {
     currentRows = rows;
+    syncTableHead();
 
     if (countEl) {
-      countEl.textContent = rows.length + ' inscritos no período';
+      countEl.textContent = isWhatsAppView()
+        ? rows.length + ' leads no período'
+        : rows.length + ' inscritos no período';
     }
 
     if (!tableBody) return;
 
+    var cols = 3;
+
     if (!rows.length) {
       tableBody.innerHTML =
-        '<tr><td colspan="3" class="admin-email__empty">Nenhum cadastro encontrado.</td></tr>';
+        '<tr><td colspan="' + cols + '" class="admin-email__empty">Nenhum cadastro encontrado.</td></tr>';
+      return;
+    }
+
+    if (isWhatsAppView()) {
+      tableBody.innerHTML = rows.map(function (row, index) {
+        return (
+          '<tr>' +
+          '<td>' + escapeHtml(row.nome || '—') + '</td>' +
+          '<td>' + escapeHtml(formatDateTime(row.created_at)) + '</td>' +
+          '<td class="admin-email__actions">' +
+          '<button type="button" class="admin-email__detail-btn" data-wa-detail="' + index + '">Ver detalhes</button>' +
+          '</td>' +
+          '</tr>'
+        );
+      }).join('');
       return;
     }
 
@@ -194,6 +240,30 @@
     }).join('');
   }
 
+  var detailModal = document.getElementById('wa-detail-modal');
+  var detailBody = document.getElementById('wa-detail-body');
+  var detailClose = document.getElementById('wa-detail-close');
+  var detailTitle = document.getElementById('wa-detail-title');
+
+  function closeWaDetail() {
+    if (detailModal) detailModal.hidden = true;
+  }
+
+  function openWaDetail(row) {
+    if (!detailModal || !detailBody || !row) return;
+    if (detailTitle) {
+      detailTitle.textContent = row.nome ? String(row.nome) : 'Detalhes do lead';
+    }
+    detailBody.innerHTML =
+      '<div><dt>Nome</dt><dd>' + escapeHtml(row.nome || '—') + '</dd></div>' +
+      '<div><dt>E-mail</dt><dd><a href="mailto:' + escapeHtml(row.email || '') + '">' + escapeHtml(row.email || '—') + '</a></dd></div>' +
+      '<div><dt>Telefone</dt><dd>' + escapeHtml(row.telefone || '—') + '</dd></div>' +
+      '<div><dt>Motivo da busca</dt><dd class="admin-email__detail-questao">' + escapeHtml(row.questao || '—') + '</dd></div>' +
+      '<div><dt>Página</dt><dd>' + escapeHtml(row.page || '—') + '</dd></div>' +
+      '<div><dt>Cadastro</dt><dd>' + escapeHtml(formatDateTime(row.created_at)) + '</dd></div>';
+    detailModal.hidden = false;
+  }
+
   function escapeHtml(value) {
     return String(value)
       .replace(/&/g, '&amp;')
@@ -202,30 +272,63 @@
       .replace(/"/g, '&quot;');
   }
 
-  async function loadSubscribers() {
+  async function loadRows() {
     var supabaseClient = getClient();
     var range = getPeriodRange();
     var search = searchInput ? searchInput.value.trim() : '';
+    var query;
 
-    var query = supabaseClient
-      .from('newsletter_subscribers')
-      .select('id, email, source_page, created_at')
-      .gte('created_at', range.start.toISOString())
-      .lte('created_at', range.end.toISOString())
-      .order('created_at', { ascending: false });
+    if (isWhatsAppView()) {
+      query = supabaseClient
+        .from('wa_leads')
+        .select('id, nome, email, telefone, questao, page, created_at')
+        .lte('created_at', range.end.toISOString())
+        .order('created_at', { ascending: false });
+    } else {
+      query = supabaseClient
+        .from('newsletter_subscribers')
+        .select('id, email, source_page, created_at')
+        .lte('created_at', range.end.toISOString())
+        .order('created_at', { ascending: false });
+    }
+
+    if (range.start) {
+      query = query.gte('created_at', range.start.toISOString());
+    }
 
     if (search) {
-      query = query.ilike('email', '%' + search + '%');
+      if (isWhatsAppView()) {
+        var term = search.replace(/,/g, ' ').replace(/%/g, '');
+        query = query.or(
+          'email.ilike.%' + term + '%,' +
+          'nome.ilike.%' + term + '%,' +
+          'telefone.ilike.%' + term + '%'
+        );
+      } else {
+        query = query.ilike('email', '%' + search + '%');
+      }
     }
 
     var result = await query;
 
     if (result.error) {
+      console.error('Admin load error:', result.error);
       renderTable([]);
       return;
     }
 
     renderTable(result.data || []);
+  }
+
+  function setView(view) {
+    currentView = view === 'whatsapp' ? 'whatsapp' : 'newsletter';
+    closeWaDetail();
+    tabButtons.forEach(function (btn) {
+      var active = btn.getAttribute('data-admin-tab') === currentView;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    return loadRows();
   }
 
   function downloadBlob(filename, blob) {
@@ -239,10 +342,28 @@
     URL.revokeObjectURL(url);
   }
 
+  function exportPrefix() {
+    return isWhatsAppView() ? 'whatsapp_' : 'newsletter_';
+  }
+
   function exportAsCsv() {
-    var lines = ['E-mail;Página;Cadastro'];
+    var lines = isWhatsAppView()
+      ? ['Nome;E-mail;Telefone;Questão;Página;Cadastro']
+      : ['E-mail;Página;Cadastro'];
 
     currentRows.forEach(function (row) {
+      if (isWhatsAppView()) {
+        lines.push([
+          '"' + String(row.nome || '').replace(/"/g, '""') + '"',
+          '"' + String(row.email || '').replace(/"/g, '""') + '"',
+          '"' + String(row.telefone || '').replace(/"/g, '""') + '"',
+          '"' + String(row.questao || '').replace(/"/g, '""') + '"',
+          '"' + String(row.page || '').replace(/"/g, '""') + '"',
+          '"' + formatDateTime(row.created_at).replace(/"/g, '""') + '"'
+        ].join(';'));
+        return;
+      }
+
       lines.push([
         '"' + String(row.email).replace(/"/g, '""') + '"',
         '"' + String(row.source_page || '').replace(/"/g, '""') + '"',
@@ -254,17 +375,29 @@
       type: 'text/csv;charset=utf-8;'
     });
 
-    downloadBlob('newsletter_' + fileStamp() + '.csv', blob);
+    downloadBlob(exportPrefix() + fileStamp() + '.csv', blob);
   }
 
   function exportAsXlsx() {
     if (!window.XLSX) return;
 
-    var sheetData = [
-      ['E-mail', 'Página', 'Cadastro']
-    ];
+    var sheetData = isWhatsAppView()
+      ? [['Nome', 'E-mail', 'Telefone', 'Questão', 'Página', 'Cadastro']]
+      : [['E-mail', 'Página', 'Cadastro']];
 
     currentRows.forEach(function (row) {
+      if (isWhatsAppView()) {
+        sheetData.push([
+          row.nome || '',
+          row.email || '',
+          row.telefone || '',
+          row.questao || '',
+          row.page || '',
+          formatDateTime(row.created_at)
+        ]);
+        return;
+      }
+
       sheetData.push([
         row.email,
         row.source_page || '',
@@ -274,8 +407,12 @@
 
     var worksheet = window.XLSX.utils.aoa_to_sheet(sheetData);
     var workbook = window.XLSX.utils.book_new();
-    window.XLSX.utils.book_append_sheet(workbook, worksheet, 'Inscritos');
-    window.XLSX.writeFile(workbook, 'newsletter_' + fileStamp() + '.xlsx');
+    window.XLSX.utils.book_append_sheet(
+      workbook,
+      worksheet,
+      isWhatsAppView() ? 'WhatsApp' : 'Inscritos'
+    );
+    window.XLSX.writeFile(workbook, exportPrefix() + fileStamp() + '.xlsx');
   }
 
   function exportAsPdf() {
@@ -284,27 +421,39 @@
     var doc = new window.jspdf.jsPDF({ orientation: 'landscape' });
 
     doc.setFontSize(14);
-    doc.text('Inscritos da newsletter', 14, 16);
+    doc.text(isWhatsAppView() ? 'Leads do WhatsApp' : 'Inscritos da newsletter', 14, 16);
     doc.setFontSize(10);
     doc.text('Total: ' + currentRows.length, 14, 24);
 
     if (typeof doc.autoTable === 'function') {
       doc.autoTable({
         startY: 30,
-        head: [['E-mail', 'Página', 'Cadastro']],
+        head: isWhatsAppView()
+          ? [['Nome', 'E-mail', 'Telefone', 'Questão', 'Página', 'Cadastro']]
+          : [['E-mail', 'Página', 'Cadastro']],
         body: currentRows.map(function (row) {
+          if (isWhatsAppView()) {
+            return [
+              row.nome || '—',
+              row.email || '—',
+              row.telefone || '—',
+              shortText(row.questao || '', 120) || '—',
+              shortText(row.page || '', 40) || '—',
+              formatDateTime(row.created_at)
+            ];
+          }
           return [
             row.email,
             row.source_page || '—',
             formatDateTime(row.created_at)
           ];
         }),
-        styles: { fontSize: 9 },
+        styles: { fontSize: 8 },
         headStyles: { fillColor: [156, 99, 111] }
       });
     }
 
-    doc.save('newsletter_' + fileStamp() + '.pdf');
+    doc.save(exportPrefix() + fileStamp() + '.pdf');
   }
 
   function fileStamp() {
@@ -323,7 +472,7 @@
 
       if (sessionResult.data.session) {
         showDashboard();
-        await loadSubscribers();
+        await loadRows();
       } else {
         showLogin();
       }
@@ -331,7 +480,7 @@
       supabaseClient.auth.onAuthStateChange(function (event) {
         if (event === 'SIGNED_IN') {
           showDashboard();
-          loadSubscribers();
+          loadRows();
         }
 
         if (event === 'SIGNED_OUT') {
@@ -384,7 +533,7 @@
         );
 
         showDashboard();
-        await loadSubscribers();
+        await loadRows();
       } catch (err) {
         console.error('Admin login exception:', err);
         var message = err && err.message ? err.message : '';
@@ -422,7 +571,7 @@
   if (filterForm) {
     filterForm.addEventListener('submit', function (event) {
       event.preventDefault();
-      loadSubscribers().catch(function (err) {
+      loadRows().catch(function (err) {
         console.error('Filter error:', err);
       });
     });
@@ -431,6 +580,42 @@
   if (periodSelect) {
     periodSelect.addEventListener('change', toggleCustomDates);
   }
+
+  tabButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      setView(btn.getAttribute('data-admin-tab')).catch(function (err) {
+        console.error('Tab switch error:', err);
+      });
+    });
+  });
+
+  if (tableBody) {
+    tableBody.addEventListener('click', function (event) {
+      var btn = event.target && event.target.closest
+        ? event.target.closest('[data-wa-detail]')
+        : null;
+      if (!btn) return;
+      var index = parseInt(btn.getAttribute('data-wa-detail'), 10);
+      if (Number.isNaN(index) || !currentRows[index]) return;
+      openWaDetail(currentRows[index]);
+    });
+  }
+
+  if (detailClose) {
+    detailClose.addEventListener('click', closeWaDetail);
+  }
+
+  if (detailModal) {
+    detailModal.addEventListener('click', function (event) {
+      if (event.target === detailModal) closeWaDetail();
+    });
+  }
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && detailModal && !detailModal.hidden) {
+      closeWaDetail();
+    }
+  });
 
   if (exportCsv) exportCsv.addEventListener('click', exportAsCsv);
   if (exportXlsx) exportXlsx.addEventListener('click', exportAsXlsx);

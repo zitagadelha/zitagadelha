@@ -8,7 +8,7 @@
   <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
   <meta name="referrer" content="no-referrer">
   <title>Login</title>
-  <link rel="stylesheet" href="/css/style.css?v=9">
+  <link rel="stylesheet" href="/css/style.css?v=11">
   <link rel="icon" href="/IMG/favicon-64.webp" type="image/webp">
   <link rel="apple-touch-icon" href="IMG/apple-touch-icon.png">
 </head>
@@ -21,7 +21,7 @@
       <div class="admin-email__login-inner">
         <header class="admin-email__login-header">
           <h1>Login</h1>
-          <p>Entre com suas credenciais para acessar a lista de inscritos da newsletter.</p>
+          <p>Entre com suas credenciais para acessar newsletter e leads do WhatsApp.</p>
         </header>
 
         <div class="admin-email__alert" id="admin-login-error" hidden></div>
@@ -81,8 +81,11 @@
     <header class="admin-email__header">
       <div class="admin-email__bar">
         <div class="admin-email__brand">
-          <strong>Newsletter</strong>
-          <span id="admin-count">0 inscritos no período</span>
+          <div class="admin-email__tabs" role="tablist" aria-label="Bases">
+            <button type="button" class="admin-email__tab is-active" data-admin-tab="newsletter" role="tab" aria-selected="true">Newsletter</button>
+            <button type="button" class="admin-email__tab" data-admin-tab="whatsapp" role="tab" aria-selected="false">WhatsApp</button>
+          </div>
+          <span id="admin-count">0 no período</span>
         </div>
 
         <form class="admin-email__filters" id="admin-filter-form">
@@ -90,14 +93,17 @@
             type="search"
             id="admin-search"
             name="busca"
-            placeholder="Buscar e-mail"
-            aria-label="Buscar e-mail"
+            placeholder="Buscar"
+            aria-label="Buscar"
           >
 
           <select id="admin-period" name="periodo" aria-label="Período">
             <option value="7">7 dias</option>
             <option value="14">14 dias</option>
             <option value="30" selected>30 dias</option>
+            <option value="60">60 dias</option>
+            <option value="90">90 dias</option>
+            <option value="todos">Todo o período</option>
             <option value="personalizado">Personalizado</option>
           </select>
 
@@ -125,7 +131,7 @@
     <main class="admin-email__main">
       <div class="admin-email__table-wrap">
         <table class="admin-email__table">
-          <thead>
+          <thead id="admin-table-head">
             <tr>
               <th>E-mail</th>
               <th>Página</th>
@@ -142,11 +148,21 @@
     </main>
   </div>
 
+  <div id="wa-detail-modal" class="admin-email__detail" hidden>
+    <div class="admin-email__detail-panel" role="dialog" aria-modal="true" aria-labelledby="wa-detail-title">
+      <div class="admin-email__detail-head">
+        <h2 id="wa-detail-title">Detalhes do lead</h2>
+        <button type="button" class="admin-email__detail-close" id="wa-detail-close" aria-label="Fechar">&times;</button>
+      </div>
+      <dl class="admin-email__detail-list" id="wa-detail-body"></dl>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/js/supabase-config.js?v=5"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js" defer></script>
-  <script src="/js/admin-email.js?v=8" defer></script>
+  <script src="/js/admin-email.js?v=11" defer></script>
 </body>
 </html>
